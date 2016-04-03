@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">HiPotato</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">用户名</string>
+    <string name="prompt_password">密码</string>
+    <string name="action_sign_in">登录</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <string name="balance">余额</string>
+    <string name="item_hint">我想...</string>
+    <string name="my_balance">余额充值</string>
+    <string name="my_bills">我的订单</string>
+    <string name="fulfill">充值</string>
+    <string name="start">开始</string>
+    <string name="pause">暂停</string>
+    <string name="drawerlayout_title">个人中心</string>
+    <string name="scan_text">将二维码放入框内, 即可自动扫描</string>
+
+    <string name="drawer_open">""</string>
+
+    <array name="dummy_items">
+        <item>One</item>
+        <item>Two</item>
+        <item>Three</item>
+        <item>Four</item>
+        <item>Five</item>
+        <item>Six</item>
+        <item>Seven</item>
+        <item>Eight</item>
+        <item>Nine</item>
+        <item>Ten</item>
+    </array>
+
+</resources>

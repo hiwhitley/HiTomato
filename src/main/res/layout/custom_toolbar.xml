@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tl_custom"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="?attr/colorPrimary"
+    android:minHeight="?attr/actionBarSize"
+    android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    app:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+    <com.hiwhitley.potatoandtomato.view.CrossView
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        app:lineColor="@color/white_bg"
+        android:padding="12dp"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginRight="@dimen/margin_10dp"
+        />
+
+</android.support.v7.widget.Toolbar>
