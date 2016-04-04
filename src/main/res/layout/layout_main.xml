@@ -6,12 +6,12 @@
     android:orientation="vertical">
 
 
-    <com.hiwhitley.potatoandtomato.view.CircleTimerView
+    <com.hiwhitley.potatoandtomato.widget.CircleTimerView
         android:id="@+id/ctv"
         android:layout_marginTop="50dp"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:layout_gravity="center_horizontal"></com.hiwhitley.potatoandtomato.view.CircleTimerView>
+        android:layout_gravity="center_horizontal"></com.hiwhitley.potatoandtomato.widget.CircleTimerView>
 
     <RadioGroup
         android:id="@+id/rp_select_time"

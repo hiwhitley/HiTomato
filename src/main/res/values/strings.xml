@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HiPotato</string>
+    <string name="app_name">HiTomato</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">用户名</string>

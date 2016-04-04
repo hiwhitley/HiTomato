@@ -1,4 +1,4 @@
-package com.hiwhitley.potatoandtomato.view;
+package com.hiwhitley.potatoandtomato.widget;
 
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;

@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hiwhitley.potatoandtomato.R;
-import com.hiwhitley.potatoandtomato.view.CircleTimerView;
+import com.hiwhitley.potatoandtomato.widget.CircleTimerView;
 
 
 /**
