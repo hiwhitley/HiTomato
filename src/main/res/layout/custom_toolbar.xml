@@ -10,6 +10,7 @@
     app:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
     <com.hiwhitley.potatoandtomato.widget.CrossView
+        android:id="@+id/cv_normal"
         android:layout_width="42dp"
         android:layout_height="42dp"
         app:lineColor="@color/white_bg"

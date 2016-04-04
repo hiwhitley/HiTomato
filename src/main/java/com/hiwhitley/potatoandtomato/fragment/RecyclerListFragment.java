@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.hiwhitley.potatoandtomato.R;
 import com.hiwhitley.potatoandtomato.activity.TimerClockActivity;
 import com.hiwhitley.potatoandtomato.adapter.RecyclerListAdapter;
 import com.hiwhitley.potatoandtomato.helper.SimpleItemTouchHelperCallback;
@@ -64,8 +66,13 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
         mItemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
+
     @Override
     public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
         mItemTouchHelper.startDrag(viewHolder);
+    }
+
+    public <T extends View> T findView(View view, int resId) {
+        return (T) view.findViewById(resId);
     }
 }

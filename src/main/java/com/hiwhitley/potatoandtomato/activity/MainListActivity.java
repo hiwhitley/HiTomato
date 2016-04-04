@@ -4,6 +4,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,9 @@ import android.view.View;
 
 import com.hiwhitley.potatoandtomato.R;
 import com.hiwhitley.potatoandtomato.fragment.RecyclerListFragment;
+import com.hiwhitley.potatoandtomato.widget.CrossView;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by hiwhitley on 2016/4/2.
@@ -22,6 +26,9 @@ public class MainListActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private RecyclerListFragment mRecyclerListFragment;
+    private CrossView mCrossView;
+    private TextInputLayout mTextInputLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +42,9 @@ public class MainListActivity extends AppCompatActivity {
     private void findViews() {
         toolbar = findView(R.id.tl_custom);
         mDrawerLayout = findView(R.id.dl_left);
+        mCrossView = findView(R.id.cv_normal);
+        mTextInputLayout = findView(R.id.ti_new_item);
+        //mTextInputLayout.setVisibility(View.GONE);
     }
 
     private void init() {
@@ -69,6 +79,18 @@ public class MainListActivity extends AppCompatActivity {
     }
 
     private void setListeners() {
+        mCrossView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                 int a = View.GONE;
+                mTextInputLayout.setVisibility(a);
+            }
+        });
+    }
+
+    private int showNewItemLayout(int flag){
+        return flag == CrossView.FLAG_STATE_PLUS ? View.GONE : View.VISIBLE;
     }
 
     public <T extends View> T findView(int resId) {
