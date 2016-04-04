@@ -1,4 +1,4 @@
-package com.hiwhitley.potatoandtomato.activity;
+package com.hiwhitley.potatoandtomato.base;
 
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;

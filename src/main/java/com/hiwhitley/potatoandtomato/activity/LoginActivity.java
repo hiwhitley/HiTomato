@@ -6,12 +6,13 @@ import android.view.View;
 import android.widget.Button;
 
 import com.hiwhitley.potatoandtomato.R;
+import com.hiwhitley.potatoandtomato.base.BaseActivity;
 
 
 /**
  * Created by hiwhitley on 2016/3/29.
  */
-public class LoginActivity extends BaseActivity{
+public class LoginActivity extends BaseActivity {
 
     private Button loginBtn;
     @Override

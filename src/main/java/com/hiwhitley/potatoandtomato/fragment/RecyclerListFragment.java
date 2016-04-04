@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.hiwhitley.potatoandtomato.R;
 import com.hiwhitley.potatoandtomato.activity.TimerClockActivity;
 import com.hiwhitley.potatoandtomato.adapter.RecyclerListAdapter;
+import com.hiwhitley.potatoandtomato.bean.Tomato;
 import com.hiwhitley.potatoandtomato.helper.SimpleItemTouchHelperCallback;
 import com.hiwhitley.potatoandtomato.helper.OnStartDragListener;
 import com.hiwhitley.potatoandtomato.impl.OnRecyclerViewItemClickListener;
@@ -50,11 +51,13 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
 
         adapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
             @Override
-            public void onItemClick(View view, String data) {
+            public <T> void onItemClick(View view, T data) {
+
                 Intent intent = new Intent(getActivity(), TimerClockActivity.class);
-                intent.putExtra(TimerClockActivity.TITLE_TEXT, "Thinking in Java");
+                intent.putExtra(TimerClockActivity.TITLE_TEXT, ((Tomato)data).getName());
                 startActivity(intent);
             }
+
         });
 
 

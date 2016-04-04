@@ -23,20 +23,8 @@
     <string name="pause">暂停</string>
     <string name="drawerlayout_title">个人中心</string>
     <string name="scan_text">将二维码放入框内, 即可自动扫描</string>
+    <string name="tip_double_click_exit">再按一次退出</string>
 
     <string name="drawer_open">""</string>
-
-    <array name="dummy_items">
-        <item>One</item>
-        <item>Two</item>
-        <item>Three</item>
-        <item>Four</item>
-        <item>Five</item>
-        <item>Six</item>
-        <item>Seven</item>
-        <item>Eight</item>
-        <item>Nine</item>
-        <item>Ten</item>
-    </array>
 
 </resources>
