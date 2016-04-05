@@ -32,4 +32,9 @@ public class TomatoDbService {
     public List<Tomato> loadAllTomato(){
         return tomatoDao.loadAll();
     }
+
+    public long insertTomato(Tomato item){
+        return tomatoDao.insert(item);
+    }
+
 }

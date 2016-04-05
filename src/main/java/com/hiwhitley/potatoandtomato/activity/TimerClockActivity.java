@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.hiwhitley.potatoandtomato.R;
 import com.hiwhitley.potatoandtomato.widget.CircleTimerView;
+import com.hiwhitley.potatoandtomato.widget.ColorDialog;
+import com.hiwhitley.potatoandtomato.widget.PromptDialog;
 
 
 /**
@@ -28,6 +30,8 @@ public class TimerClockActivity extends AppCompatActivity {
     private RadioGroup mRadioGroup;
     private CircleTimerView circleTimerView;
     private TextView titleTextView;
+    private PromptDialog promptDialog;
+    private ColorDialog colorDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,32 @@ public class TimerClockActivity extends AppCompatActivity {
 
 
     protected void init() {
+
+        promptDialog =  new PromptDialog(this).setDialogType(PromptDialog.DIALOG_TYPE_WARNING)
+                .setTitleText("温馨提示").setContentText("请先设置番茄时间")
+                .setPositiveListener("好的", new PromptDialog.OnPositiveListener() {
+                    @Override
+                    public void onClick(PromptDialog dialog) {
+                        dialog.dismiss();
+                    }
+                });
+
+        colorDialog = new ColorDialog(this);
+        //colorDialog.setTitle("");
+        colorDialog.setContentText("休息一下");
+        colorDialog.setPositiveListener("取消", new ColorDialog.OnPositiveListener() {
+            @Override
+            public void onClick(ColorDialog dialog) {
+                //Toast.makeText(this, dialog.getPositiveText().toString(), Toast.LENGTH_SHORT).show();
+                colorDialog.dismiss();
+            }
+        }).setNegativeListener("完成", new ColorDialog.OnNegativeListener() {
+            @Override
+            public void onClick(ColorDialog dialog) {
+                finish();
+                colorDialog.dismiss();
+            }
+        });
 
         String titleText = getIntent().getStringExtra(TITLE_TEXT);
         Log.i("hiwhitley","titleText:"+titleText);
@@ -133,6 +163,7 @@ public class TimerClockActivity extends AppCompatActivity {
     }
 
     private void setStartStatusView() {
+        colorDialog.show();
         if (!circleTimerView.isEnabled())
             circleTimerView.setEnabled(true);
         circleTimerView.pauseTimer();
@@ -143,7 +174,7 @@ public class TimerClockActivity extends AppCompatActivity {
 
     private void setPauseStatusViews() {
         if (circleTimerView.getCurrentTime() == 0){
-            Toast.makeText(this,"请先设置充电时间！",Toast.LENGTH_SHORT).show();
+            promptDialog.show();
             return;
         }
 

@@ -26,5 +26,9 @@
     <string name="tip_double_click_exit">再按一次退出</string>
 
     <string name="drawer_open">""</string>
+    <string name="exit">退出</string>
+    <string name="cancel_exit">取消</string>
+    <string name="exit_menu_title">HiTomato</string>
+    <string name="exit_menu_content">确定退出吗？</string>
 
 </resources>

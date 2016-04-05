@@ -2,6 +2,10 @@ package com.hiwhitley.potatoandtomato.activity;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -13,13 +17,17 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.hiwhitley.potatoandtomato.base.system.HiTomatoApplication;
 import com.hiwhitley.potatoandtomato.R;
 import com.hiwhitley.potatoandtomato.bean.Tomato;
 import com.hiwhitley.potatoandtomato.fragment.RecyclerListFragment;
 import com.hiwhitley.potatoandtomato.util.DoubleClickExitHelper;
+import com.hiwhitley.potatoandtomato.util.NotificationHelper;
+import com.hiwhitley.potatoandtomato.widget.ColorDialog;
 import com.hiwhitley.potatoandtomato.widget.CrossView;
+import com.hiwhitley.potatoandtomato.widget.PromptDialog;
 
 /**
  * Created by hiwhitley on 2016/4/2.
@@ -35,6 +43,9 @@ public class MainListActivity extends AppCompatActivity {
     private Button commitBtn;
     private int crossViewStatus = CrossView.FLAG_STATE_PLUS;
     private DoubleClickExitHelper mDoubleClickExit;
+    private NotificationManager manager;
+    private PromptDialog promptDialog;
+    private ColorDialog colorDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +67,34 @@ public class MainListActivity extends AppCompatActivity {
     }
 
     private void init() {
+
+        manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        promptDialog =  new PromptDialog(this).setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
+                .setTitleText("Success").setContentText("Your info text goes here. Loremipsum dolor sit amet, consecteturn adipisicing elit, sed do eiusmod.")
+                .setPositiveListener("OK", new PromptDialog.OnPositiveListener() {
+                    @Override
+                    public void onClick(PromptDialog dialog) {
+                        dialog.dismiss();
+                    }
+                });
+
+        colorDialog = new ColorDialog(this);
+        colorDialog.setTitle(getString(R.string.exit_menu_title));
+        colorDialog.setContentText(getString(R.string.exit_menu_content));
+        colorDialog.setContentImage(getResources().getDrawable(R.mipmap.sample_img));
+        colorDialog.setPositiveListener(getString(R.string.cancel_exit), new ColorDialog.OnPositiveListener() {
+            @Override
+            public void onClick(ColorDialog dialog) {
+                //Toast.makeText(this, dialog.getPositiveText().toString(), Toast.LENGTH_SHORT).show();
+                colorDialog.dismiss();
+            }
+        }).setNegativeListener(getString(R.string.exit), new ColorDialog.OnNegativeListener() {
+            @Override
+            public void onClick(ColorDialog dialog) {
+                finish();
+                colorDialog.dismiss();
+            }
+        });
 
         mDoubleClickExit = new DoubleClickExitHelper(this);
 
@@ -114,7 +153,10 @@ public class MainListActivity extends AppCompatActivity {
 //                        Log.i("hiwhitley", "fail:" + s);
 //                    }
 //                });
-
+                PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0,
+                        new Intent(getApplicationContext(), MainListActivity.class), 0);
+                NotificationHelper.setNotication(getApplicationContext(), manager, pendingIntent);
+                promptDialog.show();
                 Tomato tomato = new Tomato();
                 tomato.setName("hello");
                 HiTomatoApplication.getDaoSession(getApplicationContext()).getTomatoDao().insert(tomato);
@@ -131,15 +173,9 @@ public class MainListActivity extends AppCompatActivity {
         return (T) findViewById(resId);
     }
 
-    /**
-     * 监听返回--是否退出程序
-     */
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Log.i("hiwhitley", "onKeyDown");
-            return mDoubleClickExit.onKeyDown(keyCode, event);
-        }
-        return super.onKeyDown(keyCode, event);
+    public void onBackPressed() {
+        //super.onBackPressed();
+        colorDialog.show();
     }
 }
