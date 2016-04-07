@@ -6,7 +6,7 @@
     android:focusableInTouchMode="true"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_input_item" />
+    <include layout= "@layout/layout_new_tomato"/>
 
     <FrameLayout
         android:id="@+id/id_content"

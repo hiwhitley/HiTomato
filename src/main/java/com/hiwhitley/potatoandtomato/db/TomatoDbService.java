@@ -34,7 +34,13 @@ public class TomatoDbService {
     }
 
     public long insertTomato(Tomato item){
+
         return tomatoDao.insert(item);
     }
+
+    public void deleteTomato(Tomato item){
+        tomatoDao.delete(item);
+    }
+
 
 }

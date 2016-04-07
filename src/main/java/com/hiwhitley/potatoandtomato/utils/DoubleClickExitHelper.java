@@ -1,4 +1,4 @@
-package com.hiwhitley.potatoandtomato.util;
+package com.hiwhitley.potatoandtomato.utils;
 
 import android.app.Activity;
 import android.os.Handler;

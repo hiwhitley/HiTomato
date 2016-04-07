@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_new_tomato"
+    style="@style/linearlayout_horizontal"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:visibility="gone">
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/met_new_tomato"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_10dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:hint="@string/item_hint"
+        android:singleLine="true"
+        app:met_maxCharacters="32"
+        android:textColor="@color/font_black"
+        app:met_errorColor="@color/color_type_wrong"
+        android:visibility="visible"
+        app:met_clearButton="true"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelTextSize="15dp" />
+
+    <TextView
+        android:id="@+id/tv_alarm_clock"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginRight="5dp"
+        android:gravity="center"
+        android:padding="@dimen/default_padding"
+        android:text="@string/fa_clock_o"
+        android:visibility="gone"
+        android:textColor="@color/ui_green"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btn_arrow_right"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:background="@null"
+        android:gravity="center"
+        android:padding="0dp"
+        android:text="@string/fa_arrow_circle_right"
+        android:textColor="@color/ui_green"
+        android:textSize="30sp"
+        android:visibility="visible" />
+
+</LinearLayout>

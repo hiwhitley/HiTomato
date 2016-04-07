@@ -497,6 +497,7 @@ public class CircleTimerView extends View
                     handler.obtainMessage().sendToTarget();
                 }
             };
+            timer = new Timer();
             timer.schedule(timerTask, 1000, 1000);
             mStarted = true;
             if (this.mCircleTimerListener != null)

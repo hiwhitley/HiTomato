@@ -1,17 +1,18 @@
 package com.hiwhitley.potatoandtomato.activity;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.hiwhitley.potatoandtomato.R;
+import com.hiwhitley.potatoandtomato.utils.FontManager;
+import com.hiwhitley.potatoandtomato.utils.NotificationHelper;
 import com.hiwhitley.potatoandtomato.widget.CircleTimerView;
 import com.hiwhitley.potatoandtomato.widget.ColorDialog;
 import com.hiwhitley.potatoandtomato.widget.PromptDialog;
@@ -25,13 +26,15 @@ public class TimerClockActivity extends AppCompatActivity {
     public static final String TITLE_TEXT = "titleText";
     private Button pauseBtn;
     private Button startBtn;
-    private ImageButton backBtn;
+    private Button backBtn;
 
     private RadioGroup mRadioGroup;
     private CircleTimerView circleTimerView;
     private TextView titleTextView;
     private PromptDialog promptDialog;
     private ColorDialog colorDialog;
+
+    private String titleText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,7 +60,10 @@ public class TimerClockActivity extends AppCompatActivity {
 
     protected void init() {
 
-        promptDialog =  new PromptDialog(this).setDialogType(PromptDialog.DIALOG_TYPE_WARNING)
+        Typeface iconFont = FontManager.getTypeface(getApplicationContext(), FontManager.FONTAWESOME);
+        FontManager.markAsIconContainer(findViewById(R.id.rl_activity_title), iconFont);
+
+        promptDialog = new PromptDialog(this).setDialogType(PromptDialog.DIALOG_TYPE_WARNING)
                 .setTitleText("温馨提示").setContentText("请先设置番茄时间")
                 .setPositiveListener("好的", new PromptDialog.OnPositiveListener() {
                     @Override
@@ -68,7 +74,7 @@ public class TimerClockActivity extends AppCompatActivity {
 
         colorDialog = new ColorDialog(this);
         //colorDialog.setTitle("");
-        colorDialog.setContentText("休息一下");
+        colorDialog.setContentText("先休息一下吧");
         colorDialog.setPositiveListener("取消", new ColorDialog.OnPositiveListener() {
             @Override
             public void onClick(ColorDialog dialog) {
@@ -83,8 +89,8 @@ public class TimerClockActivity extends AppCompatActivity {
             }
         });
 
-        String titleText = getIntent().getStringExtra(TITLE_TEXT);
-        Log.i("hiwhitley","titleText:"+titleText);
+        titleText = getIntent().getStringExtra(TITLE_TEXT);
+        Log.i("hiwhitley", "titleText:" + titleText);
         titleTextView.setText(titleText);
 
     }
@@ -129,6 +135,9 @@ public class TimerClockActivity extends AppCompatActivity {
             public void onTimerStop() {
                 Log.i("hiwhitley", "onTimerStop:");
                 setStartStatusView();
+                colorDialog.setTitle(titleText);
+                colorDialog.show();
+                NotificationHelper.startAlarm(getBaseContext(), 1, 1);
             }
 
             @Override
@@ -163,7 +172,7 @@ public class TimerClockActivity extends AppCompatActivity {
     }
 
     private void setStartStatusView() {
-        colorDialog.show();
+
         if (!circleTimerView.isEnabled())
             circleTimerView.setEnabled(true);
         circleTimerView.pauseTimer();
@@ -173,7 +182,7 @@ public class TimerClockActivity extends AppCompatActivity {
     }
 
     private void setPauseStatusViews() {
-        if (circleTimerView.getCurrentTime() == 0){
+        if (circleTimerView.getCurrentTime() == 0) {
             promptDialog.show();
             return;
         }

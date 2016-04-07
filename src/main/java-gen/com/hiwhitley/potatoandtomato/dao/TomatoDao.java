@@ -24,7 +24,11 @@ public class TomatoDao extends AbstractDao<Tomato, Long> {
     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Name = new Property(1, String.class, "name", false, "NAME");
+        public final static Property Content = new Property(1, String.class, "content", false, "CONTENT");
+        public final static Property Order = new Property(2, Integer.class, "order", false, "ORDER");
+        public final static Property Status = new Property(3, Integer.class, "status", false, "STATUS");
+        public final static Property Time = new Property(4, String.class, "time", false, "TIME");
+        public final static Property Reminder = new Property(5, String.class, "reminder", false, "REMINDER");
     };
 
 
@@ -41,7 +45,11 @@ public class TomatoDao extends AbstractDao<Tomato, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"TOMATO\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
-                "\"NAME\" TEXT NOT NULL );"); // 1: name
+                "\"CONTENT\" TEXT NOT NULL ," + // 1: content
+                "\"ORDER\" INTEGER," + // 2: order
+                "\"STATUS\" INTEGER," + // 3: status
+                "\"TIME\" TEXT NOT NULL ," + // 4: time
+                "\"REMINDER\" TEXT);"); // 5: reminder
     }
 
     /** Drops the underlying database table. */
@@ -59,7 +67,23 @@ public class TomatoDao extends AbstractDao<Tomato, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindString(2, entity.getName());
+        stmt.bindString(2, entity.getContent());
+ 
+        Integer order = entity.getOrder();
+        if (order != null) {
+            stmt.bindLong(3, order);
+        }
+ 
+        Integer status = entity.getStatus();
+        if (status != null) {
+            stmt.bindLong(4, status);
+        }
+        stmt.bindString(5, entity.getTime());
+ 
+        String reminder = entity.getReminder();
+        if (reminder != null) {
+            stmt.bindString(6, reminder);
+        }
     }
 
     /** @inheritdoc */
@@ -73,7 +97,11 @@ public class TomatoDao extends AbstractDao<Tomato, Long> {
     public Tomato readEntity(Cursor cursor, int offset) {
         Tomato entity = new Tomato( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1) // name
+            cursor.getString(offset + 1), // content
+            cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2), // order
+            cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3), // status
+            cursor.getString(offset + 4), // time
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // reminder
         );
         return entity;
     }
@@ -82,7 +110,11 @@ public class TomatoDao extends AbstractDao<Tomato, Long> {
     @Override
     public void readEntity(Cursor cursor, Tomato entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setName(cursor.getString(offset + 1));
+        entity.setContent(cursor.getString(offset + 1));
+        entity.setOrder(cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2));
+        entity.setStatus(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
+        entity.setTime(cursor.getString(offset + 4));
+        entity.setReminder(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
      }
     
     /** @inheritdoc */
@@ -107,5 +139,5 @@ public class TomatoDao extends AbstractDao<Tomato, Long> {
     protected boolean isEntityUpdateable() {
         return true;
     }
-
+    
 }

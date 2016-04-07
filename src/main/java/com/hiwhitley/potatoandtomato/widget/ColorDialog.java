@@ -19,8 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hiwhitley.potatoandtomato.R;
-import com.hiwhitley.potatoandtomato.util.AnimationLoader;
-import com.hiwhitley.potatoandtomato.util.DisplayUtil;
+import com.hiwhitley.potatoandtomato.utils.AnimationLoader;
+import com.hiwhitley.potatoandtomato.utils.DisplayUtil;
 
 
 /**

@@ -1,6 +1,7 @@
 package com.hiwhitley.potatoandtomato.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.hiwhitley.potatoandtomato.db.TomatoDbService;
+import com.hiwhitley.potatoandtomato.utils.FontManager;
 
 /**
  * Created by hiwhitley on 2016/4/3.
@@ -28,8 +30,12 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<ItemMainListViewHo
     private OnStartDragListener mStartDragListener;
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
     private List<Tomato> mItems;
+    private Typeface iconFont;
+    private TomatoDbService dbService;
 
     public RecyclerListAdapter(Context context, OnStartDragListener startDragListener) {
+        dbService = TomatoDbService.getInstance(context);
+        iconFont = FontManager.getTypeface(context, FontManager.FONTAWESOME);
         mItems = new ArrayList<>();
         mItems = TomatoDbService.getInstance(context).loadAllTomato();
         mStartDragListener = startDragListener;
@@ -45,7 +51,8 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<ItemMainListViewHo
     @Override
     public void onBindViewHolder(final ItemMainListViewHolder holder, int position) {
 
-        holder.text.setText(mItems.get(position).getName());
+        holder.text.setText(mItems.get(position).getContent());
+        holder.handle.setTypeface(iconFont);
         holder.handle.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -69,6 +76,11 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<ItemMainListViewHo
         }
     }
 
+    public void addItem(Tomato tomato) {
+        mItems.add(tomato);
+        notifyItemInserted(mItems.size());
+    }
+
     @Override
     public int getItemCount() {
         return mItems.size();
@@ -87,6 +99,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<ItemMainListViewHo
     @Override
     public void onItemDismiss(int position) {
         //删除mItems数据
+        dbService.deleteTomato(mItems.get(position));
         mItems.remove(position);
         //删除RecyclerView列表对应item
         notifyItemRemoved(position);

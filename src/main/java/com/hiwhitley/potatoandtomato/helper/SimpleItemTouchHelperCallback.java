@@ -20,6 +20,7 @@ import android.graphics.Canvas;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 
 /**
  * An implementation of {@link ItemTouchHelper.Callback} that enables basic drag & drop and
@@ -61,6 +62,7 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
         } else {
             final int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
             final int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
+            Log.i("hiwhitley", "hiwhitley:" + swipeFlags);
             return makeMovementFlags(dragFlags, swipeFlags);
         }
     }
@@ -79,6 +81,7 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int i) {
         // Notify the adapter of the dismissal
+        Log.i("hiwhitley", "onSwiped:" + i);
         mAdapter.onItemDismiss(viewHolder.getAdapterPosition());
     }
 

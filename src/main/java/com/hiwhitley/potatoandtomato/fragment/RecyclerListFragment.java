@@ -1,25 +1,21 @@
 package com.hiwhitley.potatoandtomato.fragment;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
-import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.hiwhitley.potatoandtomato.R;
 import com.hiwhitley.potatoandtomato.activity.TimerClockActivity;
 import com.hiwhitley.potatoandtomato.adapter.RecyclerListAdapter;
 import com.hiwhitley.potatoandtomato.bean.Tomato;
-import com.hiwhitley.potatoandtomato.helper.SimpleItemTouchHelperCallback;
 import com.hiwhitley.potatoandtomato.helper.OnStartDragListener;
+import com.hiwhitley.potatoandtomato.helper.SimpleItemTouchHelperCallback;
 import com.hiwhitley.potatoandtomato.impl.OnRecyclerViewItemClickListener;
 
 /**
@@ -28,7 +24,7 @@ import com.hiwhitley.potatoandtomato.impl.OnRecyclerViewItemClickListener;
 public class RecyclerListFragment extends Fragment implements OnStartDragListener {
 
     private ItemTouchHelper mItemTouchHelper;
-
+    private  RecyclerListAdapter adapter;
     public RecyclerListFragment() {
     }
 
@@ -41,7 +37,7 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        RecyclerListAdapter adapter = new RecyclerListAdapter(getActivity(), this);
+        adapter = new RecyclerListAdapter(getActivity(), this);
         //参数view即为我们在onCreateView中return的view
         RecyclerView recyclerView = (RecyclerView) view;
         //固定recyclerview大小
@@ -54,7 +50,7 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
             public <T> void onItemClick(View view, T data) {
 
                 Intent intent = new Intent(getActivity(), TimerClockActivity.class);
-                intent.putExtra(TimerClockActivity.TITLE_TEXT, ((Tomato)data).getName());
+                intent.putExtra(TimerClockActivity.TITLE_TEXT, ((Tomato)data).getContent());
                 startActivity(intent);
             }
 
@@ -69,6 +65,9 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
         mItemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
+    public void inSertItem(Tomato tomato){
+        adapter.addItem(tomato);
+    }
 
     @Override
     public void onStartDrag(RecyclerView.ViewHolder viewHolder) {

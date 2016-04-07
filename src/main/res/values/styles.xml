@@ -9,6 +9,8 @@
         <item name="drawerArrowStyle">@style/AppTheme.DrawerArrowToggle</item>
 
         <item name="android:windowAnimationStyle" >@style/default_animation</item>
+        <item name="colorAccent">#FF4081</item>
+        <item name="android:windowBackground">@color/white_bg</item>
     </style>
 
     <!-- 默认Activity跳转动画 -->

@@ -3,6 +3,7 @@ package com.hiwhitley.potatoandtomato.adapter.viewholer;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,11 +15,11 @@ import com.hiwhitley.potatoandtomato.helper.ItemTouchHelperViewHolder;
  */
 public class ItemMainListViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder{
     public TextView text;
-    public ImageView handle;
+    public Button handle;
     public ItemMainListViewHolder(View itemView) {
         super(itemView);
         text = (TextView) itemView.findViewById(R.id.text);
-        handle = (ImageView) itemView.findViewById(R.id.handle);
+        handle = (Button) itemView.findViewById(R.id.handle);
     }
 
     @Override

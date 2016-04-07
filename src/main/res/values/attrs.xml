@@ -3,4 +3,8 @@
     <declare-styleable name="CrossView">
         <attr name="lineColor" format="color"/>
     </declare-styleable>
+
+    <declare-styleable name="HiTextView">
+        <attr name="htv_typeface" format="string"/>
+    </declare-styleable>
 </resources>

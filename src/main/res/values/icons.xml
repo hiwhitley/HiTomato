@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fa_clock_o" >&#xf017;</string>
+    <string name="fa_arrow_circle_right" >&#xf0a9;</string>
+    <string name="fa_arrow_circle_o_right" >&#xf18e;</string>
+    <string name="fa_arrow_left" >&#xf060;</string>
+    <string name="fa_chevron_left" >&#xf053;</string>
+    <string name="fa_bar" >&#xf0c9;</string>
+</resources>

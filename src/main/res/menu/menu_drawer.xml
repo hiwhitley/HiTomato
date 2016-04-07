@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/icon_home"
+            android:title="首页"
+            app:itemBackground="@drawable/btn_bg_gray" />
+        <item
+            android:id="@+id/nav_stastic"
+            android:icon="@drawable/icon_stastic"
+            android:title="历史统计"
+            app:itemBackground="@drawable/btn_bg_gray" />
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/icon_setting"
+            android:title="基本设置"
+            app:itemBackground="@drawable/btn_bg_gray" />
+        <item
+            android:id="@+id/nav_upload"
+            android:icon="@drawable/icon_upload"
+            android:title="同步数据"
+            app:itemBackground="@drawable/btn_bg_gray" />
+        <item
+            android:id="@+id/nav_love"
+            android:icon="@drawable/icon_love"
+            android:title="亲，给个好评"
+            app:itemBackground="@drawable/btn_bg_gray" />
+        <item
+            android:id="@+id/nav_email"
+            android:icon="@drawable/icon_email"
+            android:title="联系我"
+            app:itemBackground="@drawable/btn_bg_gray" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/icon_about"
+            android:title="关于"
+            app:itemBackground="@drawable/btn_bg_gray" />
+    </group>
+</menu>

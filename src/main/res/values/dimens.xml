@@ -13,6 +13,12 @@
     <dimen name="avator_height">100dp</dimen>
 
     <!--textSize-->
-    <dimen name="rb_text_size">25dp</dimen>
-    <dimen name="text_size_medium">20dp</dimen>
+    <dimen name="rb_text_size">25sp</dimen>
+    <dimen name="text_size_medium">20sp</dimen>
+
+    <dimen name="default_padding_top">5dp</dimen>
+    <dimen name="default_padding_left">10dp</dimen>
+    <dimen name="default_padding_right">5dp</dimen>
+    <dimen name="default_padding_bottom">5dp</dimen>
+    <dimen name="default_padding">10dp</dimen>
 </resources>
