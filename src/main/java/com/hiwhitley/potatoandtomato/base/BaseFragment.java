@@ -64,4 +64,8 @@ public abstract class BaseFragment extends Fragment {
     protected abstract void init();
 
     protected abstract void setListener();
+
+    public <T extends View> T findView(View view,int resId) {
+        return (T) view.findViewById(resId);
+    }
 }

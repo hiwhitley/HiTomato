@@ -1,6 +1,7 @@
 package com.hiwhitley.potatoandtomato.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import com.hiwhitley.potatoandtomato.activity.TimerClockActivity;
 import com.hiwhitley.potatoandtomato.adapter.RecyclerListAdapter;
 import com.hiwhitley.potatoandtomato.bean.Tomato;
+import com.hiwhitley.potatoandtomato.helper.LinearItemDecoration;
 import com.hiwhitley.potatoandtomato.helper.OnStartDragListener;
 import com.hiwhitley.potatoandtomato.helper.SimpleItemTouchHelperCallback;
 import com.hiwhitley.potatoandtomato.impl.OnRecyclerViewItemClickListener;
@@ -41,7 +43,10 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
         //参数view即为我们在onCreateView中return的view
         RecyclerView recyclerView = (RecyclerView) view;
         //固定recyclerview大小
-        recyclerView.setHasFixedSize(true);
+        //recyclerView.setHasFixedSize(true);
+
+        //recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //recyclerView.addItemDecoration(new LinearItemDecoration(Color.BLACK));
         //设置adapter
         recyclerView.setAdapter(adapter);
 

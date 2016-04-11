@@ -22,11 +22,20 @@
             android:id="@+id/handle"
             android:layout_width="?listPreferredItemHeight"
             android:layout_height="?listPreferredItemHeight"
-            android:background="@null"
             android:layout_gravity="center"
+            android:background="@null"
             android:text="@string/fa_bar"
             android:textColor="@color/ui_deep_gray"
             android:textSize="30sp" />
-    </LinearLayout>
 
+        <TextView
+            android:id="@+id/tv_delete"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_red_light"
+            android:gravity="center"
+            android:text="删除"
+            android:textColor="@android:color/white"
+            android:visibility="gone" />
+    </LinearLayout>
 </RelativeLayout>

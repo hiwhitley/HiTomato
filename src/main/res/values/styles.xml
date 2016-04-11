@@ -7,9 +7,7 @@
         <item name="colorPrimary">@color/ui_green</item>
         <!--返回键样式-->
         <item name="drawerArrowStyle">@style/AppTheme.DrawerArrowToggle</item>
-
         <item name="android:windowAnimationStyle" >@style/default_animation</item>
-        <item name="colorAccent">#FF4081</item>
         <item name="android:windowBackground">@color/white_bg</item>
     </style>
 
@@ -53,4 +51,16 @@
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:backgroundDimAmount">0.4</item>
     </style>
+
+    <style name="selectableItemBackground">
+        <item name="android:background">@drawable/btn_bg_gray</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="ToolbarTitleAppearance" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/font_white</item>
+    </style>
+
 </resources>

@@ -6,6 +6,7 @@ import android.content.Context;
 import com.hiwhitley.potatoandtomato.dao.Constants;
 import com.hiwhitley.potatoandtomato.dao.DaoMaster;
 import com.hiwhitley.potatoandtomato.dao.DaoSession;
+import com.orhanobut.logger.Logger;
 
 import cn.bmob.v3.Bmob;
 
@@ -17,12 +18,15 @@ public class HiTomatoApplication extends Application{
     private static DaoMaster daoMaster;
     private static DaoSession daoSession;
     private static final String ApplicationID = "2e131033952490ce0bc840523ade2ade";
+    private static final String DEFAULT_TAG = "hiwhitley";
     @Override
     public void onCreate() {
         super.onCreate();
 
         // 初始化 Bmob SDK
         Bmob.initialize(this, ApplicationID);
+
+        Logger.init();
     }
 
     /**

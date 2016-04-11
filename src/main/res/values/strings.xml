@@ -30,5 +30,11 @@
     <string name="cancel_exit">取消</string>
     <string name="exit_menu_title">HiTomato</string>
     <string name="exit_menu_content">确定退出吗？</string>
+    <string name="setting_sound">声音设置</string>
+    <string name="setting_vibrate">震动</string>
+    <string name="setting_theme_color">主题色</string>
+    <string name="setting_alarm">每日提醒</string>
+    <string name="sound_count">通知声音重复</string>
+    <string name="sound_type">通知类型</string>
 
 </resources>

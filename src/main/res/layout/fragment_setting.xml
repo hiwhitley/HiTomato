@@ -1,6 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white_bg"
+    android:orientation="vertical"
+    android:padding="@dimen/fragment_padding">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/iv_sound"
+            android:layout_width="@dimen/setting_iv_size"
+            android:layout_height="@dimen/setting_iv_size"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/icon_sound" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iv_sound"
+            android:text="@string/setting_sound"
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/setting_text_size" />
+
+        <com.hiwhitley.potatoandtomato.widget.ShSwitchView
+            android:id="@+id/swv_sound"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            app:tintColor="@color/ui_green" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        style="@style/selectableItemBackground"
+        android:layout_marginBottom="10dp"
+        android:paddingLeft="30dp">
+
+        <TextView
+            android:id="@+id/tv_sound_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:padding="10dp"
+            android:text="@string/sound_count"
+            android:textColor="@color/font_black"
+            android:textSize="15sp" />
+
+        <com.hiwhitley.potatoandtomato.widget.SegmentControl
+            android:id="@+id/sec_sound_repeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_sound_count"
+            android:layout_margin="10dp"
+            android:textSize="15sp"
+            app:colors="@color/ui_green"
+            app:cornerRadius="8dp"
+            app:direction="horizon"
+            app:horizonGap="20dp"
+            app:texts="一次|两次|三次"
+            app:verticalGap="8dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/selectableItemBackground"
+        android:layout_marginBottom="10dp"
+        android:paddingLeft="30dp">
+
+        <TextView
+            android:id="@+id/tv_sound_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:padding="10dp"
+            android:text="@string/sound_type"
+            android:textColor="@color/font_black"
+            android:textSize="15sp" />
+
+        <com.hiwhitley.potatoandtomato.widget.SegmentControl
+            android:id="@+id/sec_sound_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_sound_type"
+            android:layout_margin="10dp"
+            android:textSize="15sp"
+            app:colors="@color/ui_green"
+            app:cornerRadius="8dp"
+            app:direction="horizon"
+            app:horizonGap="20dp"
+            app:texts="类型一|类型二|类型三"
+            app:verticalGap="8dp" />
+    </RelativeLayout>
+
+    <View style="@style/divider_vertical" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/iv_vibrate"
+            android:layout_width="@dimen/setting_iv_size"
+            android:layout_height="@dimen/setting_iv_size"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/icon_vibrate" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iv_vibrate"
+            android:text="@string/setting_vibrate"
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/setting_text_size" />
+
+        <com.hiwhitley.potatoandtomato.widget.ShSwitchView
+            android:id="@+id/swv_vibrate"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            app:tintColor="@color/ui_green" />
+    </RelativeLayout>
+
+    <View style="@style/divider_vertical" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/iv_theme_color"
+            android:layout_width="@dimen/setting_iv_size"
+            android:layout_height="@dimen/setting_iv_size"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/icon_theme_color" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iv_theme_color"
+            android:text="@string/setting_theme_color"
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/setting_text_size" />
+
+        <com.hiwhitley.potatoandtomato.widget.ShSwitchView
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            app:tintColor="@color/ui_green" />
+    </RelativeLayout>
+
+    <View style="@style/divider_vertical" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/iv_alarm"
+            android:layout_width="@dimen/setting_iv_size"
+            android:layout_height="@dimen/setting_iv_size"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/icon_alarm" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iv_alarm"
+            android:text="@string/setting_alarm"
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/setting_text_size" />
+
+        <com.hiwhitley.potatoandtomato.widget.ShSwitchView
+            android:id="@+id/swv_alarm"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            app:tintColor="@color/ui_green" />
+    </RelativeLayout>
 
 </LinearLayout>

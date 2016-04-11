@@ -21,4 +21,9 @@
     <dimen name="default_padding_right">5dp</dimen>
     <dimen name="default_padding_bottom">5dp</dimen>
     <dimen name="default_padding">10dp</dimen>
+    <dimen name="fragment_padding">16dp</dimen>
+
+    <!--setting_image-->
+    <dimen name="setting_iv_size" >25dp</dimen>
+    <dimen name="setting_text_size" >18sp</dimen>
 </resources>

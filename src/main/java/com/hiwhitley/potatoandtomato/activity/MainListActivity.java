@@ -10,7 +10,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -26,6 +25,8 @@ import com.hiwhitley.potatoandtomato.R;
 import com.hiwhitley.potatoandtomato.base.BaseActivity;
 import com.hiwhitley.potatoandtomato.bean.Tomato;
 import com.hiwhitley.potatoandtomato.db.TomatoDbService;
+import com.hiwhitley.potatoandtomato.fragment.HistoryFragment;
+import com.hiwhitley.potatoandtomato.fragment.HistoryFragment2;
 import com.hiwhitley.potatoandtomato.fragment.RecyclerListFragment;
 import com.hiwhitley.potatoandtomato.fragment.SettingFragment;
 import com.hiwhitley.potatoandtomato.utils.FontManager;
@@ -194,23 +195,24 @@ public class MainListActivity extends BaseActivity {
         });
     }
 
-    private void startNextView(Fragment fragment,String title){
+    private void startNextView(Fragment fragment, String title) {
         getSupportFragmentManager().beginTransaction().replace(R.id.id_content, fragment).commit();
         toolbar.setTitle(title);
     }
 
-    private void navigationViewItemSelected(MenuItem menuItem){
-        switch (menuItem.getItemId())
-        {
+    private void navigationViewItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
             case R.id.nav_home:
-                startNextView(new RecyclerListFragment(),"首页");
+                startNextView(new RecyclerListFragment(), "首页");
                 mCrossView.setVisibility(View.VISIBLE);
                 Log.i("hiwhitley", "nav_home");
                 break;
-            case R.id.nav_stastic:
+            case R.id.nav_history:
+                startNextView(new HistoryFragment(), "历史统计");
+                mCrossView.setVisibility(View.GONE);
                 break;
             case R.id.nav_setting:
-                startNextView(new SettingFragment(),"基本设置");
+                startNextView(new SettingFragment(), "基本设置");
                 mCrossView.setVisibility(View.GONE);
                 break;
             case R.id.nav_upload:
@@ -226,14 +228,18 @@ public class MainListActivity extends BaseActivity {
                         // TODO Auto-generated method stub
                         LogUtils.i("批量添加成功");
                     }
+
                     @Override
                     public void onFailure(int code, String msg) {
                         // TODO Auto-generated method stub
-                        LogUtils.i("批量添加失败:"+msg);
+                        LogUtils.i("批量添加失败:" + msg);
                     }
                 });
                 break;
             case R.id.nav_love:
+
+                startNextView(new HistoryFragment2(), "历史统计");
+                mCrossView.setVisibility(View.GONE);
                 break;
             case R.id.nav_email:
                 break;
@@ -243,12 +249,14 @@ public class MainListActivity extends BaseActivity {
     }
 
     private void addNewTomato() {
-        if (TextUtils.isEmpty(materialEditText.getText().toString()) || materialEditText.getText().length() > 32){
+        if (TextUtils.isEmpty(materialEditText.getText().toString()) || materialEditText.getText().length() > 32) {
             materialEditText.setError("请正确输入番茄内容");
             return;
         }
         Tomato tomato = new Tomato();
         tomato.setContent(materialEditText.getText().toString());
+        tomato.setOrder(TomatoDbService.getInstance(getApplicationContext()).getTomatoMaxOrder() + 1);
+        //tomato.setOrder(2);
         tomato.setTime("today");
         TomatoDbService.getInstance(getApplicationContext()).insertTomato(tomato);
         mRecyclerListFragment.inSertItem(tomato);
@@ -258,10 +266,11 @@ public class MainListActivity extends BaseActivity {
         //hideSoftKeyBoard();
     }
 
-    private void hideSoftKeyBoard(){
+    private void hideSoftKeyBoard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(materialEditText.getWindowToken(), 0);
     }
+
     private void showNewItemLayout() {
         int flag = (crossViewStatus == CrossView.FLAG_STATE_PLUS ? View.GONE : View.VISIBLE);
         materialEditText.setText("");

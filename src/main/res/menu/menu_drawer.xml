@@ -10,7 +10,7 @@
             android:title="首页"
             app:itemBackground="@drawable/btn_bg_gray" />
         <item
-            android:id="@+id/nav_stastic"
+            android:id="@+id/nav_history"
             android:icon="@drawable/icon_stastic"
             android:title="历史统计"
             app:itemBackground="@drawable/btn_bg_gray" />

@@ -23,7 +23,9 @@ android {
             java.srcDirs = ['src/main/java', 'src/main/java-gen']
         }
     }
+
 }
+
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -35,4 +37,6 @@ dependencies {
     compile files('libs/okhttp-2.4.0.jar')
     compile files('libs/okio-1.4.0.jar')
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
+    compile files('libs/logger.jar')
+    compile 'com.prolificinteractive:material-calendarview:1.2.0'
 }

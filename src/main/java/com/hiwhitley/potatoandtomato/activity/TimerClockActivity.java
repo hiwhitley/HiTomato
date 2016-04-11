@@ -11,11 +11,15 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.hiwhitley.potatoandtomato.R;
+import com.hiwhitley.potatoandtomato.fragment.SettingFragment;
 import com.hiwhitley.potatoandtomato.utils.FontManager;
+import com.hiwhitley.potatoandtomato.utils.LogUtils;
 import com.hiwhitley.potatoandtomato.utils.NotificationHelper;
+import com.hiwhitley.potatoandtomato.utils.SPUtils;
 import com.hiwhitley.potatoandtomato.widget.CircleTimerView;
 import com.hiwhitley.potatoandtomato.widget.ColorDialog;
 import com.hiwhitley.potatoandtomato.widget.PromptDialog;
+import com.orhanobut.logger.Logger;
 
 
 /**
@@ -24,10 +28,10 @@ import com.hiwhitley.potatoandtomato.widget.PromptDialog;
 public class TimerClockActivity extends AppCompatActivity {
 
     public static final String TITLE_TEXT = "titleText";
+
     private Button pauseBtn;
     private Button startBtn;
     private Button backBtn;
-
     private RadioGroup mRadioGroup;
     private CircleTimerView circleTimerView;
     private TextView titleTextView;
@@ -59,6 +63,8 @@ public class TimerClockActivity extends AppCompatActivity {
 
 
     protected void init() {
+
+       // NotificationHelper.init(getApplicationContext());
 
         Typeface iconFont = FontManager.getTypeface(getApplicationContext(), FontManager.FONTAWESOME);
         FontManager.markAsIconContainer(findViewById(R.id.rl_activity_title), iconFont);
@@ -137,7 +143,8 @@ public class TimerClockActivity extends AppCompatActivity {
                 setStartStatusView();
                 colorDialog.setTitle(titleText);
                 colorDialog.show();
-                NotificationHelper.startAlarm(getBaseContext(), 1, 1);
+                NotificationHelper.startVibrate(getApplicationContext());
+                NotificationHelper.startAlarm(getApplicationContext());
             }
 
             @Override
@@ -193,6 +200,11 @@ public class TimerClockActivity extends AppCompatActivity {
         startBtn.setVisibility(View.GONE);
         pauseBtn.setVisibility(View.VISIBLE);
         mRadioGroup.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     public <T extends View> T findView(int resId) {

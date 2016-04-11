@@ -8,9 +8,12 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+
 import com.hiwhitley.potatoandtomato.R;
 import com.hiwhitley.potatoandtomato.adapter.viewholer.ItemMainListViewHolder;
 import com.hiwhitley.potatoandtomato.bean.Tomato;
+import com.hiwhitley.potatoandtomato.helper.ItemSlideHelper;
 import com.hiwhitley.potatoandtomato.helper.ItemTouchHelperAdapter;
 import com.hiwhitley.potatoandtomato.helper.OnStartDragListener;
 import com.hiwhitley.potatoandtomato.impl.OnRecyclerViewItemClickListener;
@@ -32,12 +35,34 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<ItemMainListViewHo
     private List<Tomato> mItems;
     private Typeface iconFont;
     private TomatoDbService dbService;
+    private RecyclerView mRecyclerView;
+
+//    @Override
+//    public int getHorizontalRange(RecyclerView.ViewHolder holder) {
+//        if(holder.itemView instanceof LinearLayout){
+//            ViewGroup viewGroup = (ViewGroup) holder.itemView;
+//            if(viewGroup.getChildCount() == 2){
+//                return viewGroup.getChildAt(1).getLayoutParams().width;
+//            }
+//        }
+//        return 0;
+//    }
+//
+//    @Override
+//    public RecyclerView.ViewHolder getChildViewHolder(View childView) {
+//        return mRecyclerView.getChildViewHolder(childView);
+//    }
+//
+//    @Override
+//    public View findTargetView(float x, float y) {
+//        return mRecyclerView.findChildViewUnder(x, y);
+//    }
 
     public RecyclerListAdapter(Context context, OnStartDragListener startDragListener) {
         dbService = TomatoDbService.getInstance(context);
         iconFont = FontManager.getTypeface(context, FontManager.FONTAWESOME);
         mItems = new ArrayList<>();
-        mItems = TomatoDbService.getInstance(context).loadAllTomato();
+        mItems = TomatoDbService.getInstance(context).loadAllTomatoByOrder();
         mStartDragListener = startDragListener;
     }
 
@@ -68,6 +93,14 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<ItemMainListViewHo
         holder.itemView.setTag(mItems.get(position));
     }
 
+//    @Override
+//    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+//        super.onAttachedToRecyclerView(recyclerView);
+//
+//        mRecyclerView = recyclerView;
+//        mRecyclerView.addOnItemTouchListener(new ItemSlideHelper(mRecyclerView.getContext(), this));
+//    }
+
     @Override
     public void onClick(View v) {
         if (mOnItemClickListener != null) {
@@ -89,8 +122,11 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<ItemMainListViewHo
 
     @Override
     public boolean onItemMove(int fromPosition, int toPosition) {
+
+
         //交换mItems数据的位置
         Collections.swap(mItems, fromPosition, toPosition);
+        dbService.swapTomato(mItems.get(fromPosition),mItems.get(toPosition));
         //交换RecyclerView列表中item的位置
         notifyItemMoved(fromPosition, toPosition);
         return true;

@@ -5,8 +5,14 @@ import android.content.Context;
 import com.hiwhitley.potatoandtomato.base.system.HiTomatoApplication;
 import com.hiwhitley.potatoandtomato.bean.Tomato;
 import com.hiwhitley.potatoandtomato.dao.TomatoDao;
+import com.hiwhitley.potatoandtomato.utils.LogUtils;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import de.greenrobot.dao.query.Query;
+import de.greenrobot.dao.query.QueryBuilder;
+import de.greenrobot.dao.query.WhereCondition;
 
 /**
  * Created by hiwhitley on 2016/4/4.
@@ -33,14 +39,36 @@ public class TomatoDbService {
         return tomatoDao.loadAll();
     }
 
-    public long insertTomato(Tomato item){
+    public List<Tomato> loadAllTomatoByOrder(){
+        List<Tomato> list =  tomatoDao.queryBuilder().orderAsc(TomatoDao.Properties.Order).list();
+        if (list.size() == 0)
+            return new ArrayList<Tomato>();
+        else
+            return list;
+    }
 
+    public long insertTomato(Tomato item){
         return tomatoDao.insert(item);
+    }
+
+    public int getTomatoMaxOrder(){
+        List<Tomato> list =  tomatoDao.queryBuilder().orderDesc(TomatoDao.Properties.Order).list();
+        if (list.size() == 0)
+            return 0;
+        else
+            return list.get(0).getOrder();
     }
 
     public void deleteTomato(Tomato item){
         tomatoDao.delete(item);
     }
 
+    public void swapTomato(Tomato from, Tomato to){
+        int order = from.getOrder();
+        from.setOrder(to.getOrder());
+        tomatoDao.update(from);
+        to.setOrder(order);
+        tomatoDao.update(to);
+    }
 
 }
