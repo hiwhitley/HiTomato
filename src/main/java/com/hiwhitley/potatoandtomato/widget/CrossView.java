@@ -334,8 +334,8 @@ public class CrossView extends View {
             out.writeInt(this.flagState);
         }
 
-        public static final Parcelable.Creator<CrossViewState> CREATOR =
-                new Parcelable.Creator<CrossViewState>() {
+        public static final Creator<CrossViewState> CREATOR =
+                new Creator<CrossViewState>() {
                     public CrossViewState createFromParcel(Parcel in) {
                         return new CrossViewState(in);
                     }

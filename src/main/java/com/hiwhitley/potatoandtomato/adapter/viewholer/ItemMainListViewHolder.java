@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hiwhitley.potatoandtomato.R;
@@ -12,10 +13,10 @@ import com.hiwhitley.potatoandtomato.helper.ItemTouchHelperViewHolder;
 /**
  * Created by hiwhitley on 2016/4/3.
  */
-public class MainListViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder{
+public class ItemMainListViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder{
     public TextView text;
     public Button handle;
-    public MainListViewHolder(View itemView) {
+    public ItemMainListViewHolder(View itemView) {
         super(itemView);
         text = (TextView) itemView.findViewById(R.id.text);
         handle = (Button) itemView.findViewById(R.id.handle);
