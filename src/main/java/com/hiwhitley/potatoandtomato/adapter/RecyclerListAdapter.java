@@ -8,28 +8,27 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.hiwhitley.potatoandtomato.R;
-import com.hiwhitley.potatoandtomato.adapter.viewholer.ItemMainListViewHolder;
+import com.hiwhitley.potatoandtomato.adapter.viewholer.MainListViewHolder;
 import com.hiwhitley.potatoandtomato.bean.Tomato;
-import com.hiwhitley.potatoandtomato.helper.ItemSlideHelper;
+import com.hiwhitley.potatoandtomato.db.TomatoDbService;
 import com.hiwhitley.potatoandtomato.helper.ItemTouchHelperAdapter;
 import com.hiwhitley.potatoandtomato.helper.OnStartDragListener;
 import com.hiwhitley.potatoandtomato.impl.OnRecyclerViewItemClickListener;
+import com.hiwhitley.potatoandtomato.utils.FontManager;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.hiwhitley.potatoandtomato.db.TomatoDbService;
-import com.hiwhitley.potatoandtomato.utils.FontManager;
-
 /**
  * Created by hiwhitley on 2016/4/3.
  */
-public class RecyclerListAdapter extends RecyclerView.Adapter<ItemMainListViewHolder> implements ItemTouchHelperAdapter, View.OnClickListener {
+public class RecyclerListAdapter extends RecyclerView.Adapter<MainListViewHolder> implements ItemTouchHelperAdapter, View.OnClickListener {
 
 
+    public static final String TAG = "hiwhitley";
     private OnStartDragListener mStartDragListener;
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
     private List<Tomato> mItems;
@@ -67,14 +66,14 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<ItemMainListViewHo
     }
 
     @Override
-    public ItemMainListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MainListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main_list, null);
         view.setOnClickListener(this);
-        return new ItemMainListViewHolder(view);
+        return new MainListViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ItemMainListViewHolder holder, int position) {
+    public void onBindViewHolder(final MainListViewHolder holder, int position) {
 
         holder.text.setText(mItems.get(position).getContent());
         holder.handle.setTypeface(iconFont);
@@ -111,7 +110,8 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<ItemMainListViewHo
 
     public void addItem(Tomato tomato) {
         mItems.add(tomato);
-        notifyItemInserted(mItems.size());
+        System.out.println( "addItem" + mItems.size());
+        notifyItemInserted(mItems.size() - 1);
     }
 
     @Override

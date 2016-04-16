@@ -2,28 +2,37 @@ package com.hiwhitley.potatoandtomato.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.hiwhitley.potatoandtomato.R;
+import com.hiwhitley.potatoandtomato.adapter.StatisticAdapter;
 import com.hiwhitley.potatoandtomato.base.BaseFragment;
-import com.prolificinteractive.materialcalendarview.CalendarMode;
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.hiwhitley.potatoandtomato.bean.DailyEvent;
+import com.hiwhitley.potatoandtomato.db.DailyEventDbService;
+import com.hiwhitley.potatoandtomato.widget.weekview.WeekViewEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by hiwhitley on 2016/4/10.
+ * Created by hiwhitley on 2016/4/13.
  */
-public class HistoryFragment extends BaseFragment{
+public class StatisticFragment extends BaseFragment{
 
     private View mRootView;
-    private MaterialCalendarView calendarView;
+    private RecyclerView mRecyclerView;
+    private ArrayList<WeekViewEvent> mWeekViewEvents;
+    private List<DailyEvent> mDailyEvents;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (mRootView == null) {
-            mRootView = inflater.inflate(R.layout.fragment_history, container, false);
+            mRootView = inflater.inflate(R.layout.fragment_statistic, container, false);
             findViews();
             init();
             setListener();
@@ -38,21 +47,19 @@ public class HistoryFragment extends BaseFragment{
 
     @Override
     protected void findViews() {
-        calendarView = findView(mRootView, R.id.calendarView);
+        mRecyclerView = findView(mRootView, R.id.rv_statistic);
     }
 
     @Override
     protected void init() {
-
-        calendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_MULTIPLE);
-        calendarView.setCalendarDisplayMode(CalendarMode.WEEKS);
+        mDailyEvents = DailyEventDbService.getInstance(getActivity()).loadAllDailyEvent();
+        StatisticAdapter mStatisticAdapter = new StatisticAdapter(getActivity(), mDailyEvents);
+        mRecyclerView.setAdapter(mStatisticAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     @Override
     protected void setListener() {
 
     }
-
-
-
 }

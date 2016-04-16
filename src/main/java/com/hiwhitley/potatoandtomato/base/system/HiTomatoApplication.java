@@ -7,6 +7,8 @@ import com.hiwhitley.potatoandtomato.dao.Constants;
 import com.hiwhitley.potatoandtomato.dao.DaoMaster;
 import com.hiwhitley.potatoandtomato.dao.DaoSession;
 import com.orhanobut.logger.Logger;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 import cn.bmob.v3.Bmob;
 
@@ -15,18 +17,23 @@ import cn.bmob.v3.Bmob;
  */
 public class HiTomatoApplication extends Application{
 
+    private static final String BMOB_ID = "2e131033952490ce0bc840523ade2ade";
+    private static final String WX_ID = "2e131033952490ce0bc840523ade2ade";
+    private static final String DEFAULT_TAG = "hiwhitley";
+
     private static DaoMaster daoMaster;
     private static DaoSession daoSession;
-    private static final String ApplicationID = "2e131033952490ce0bc840523ade2ade";
-    private static final String DEFAULT_TAG = "hiwhitley";
+    private static IWXAPI api;
+
     @Override
     public void onCreate() {
         super.onCreate();
 
         // 初始化 Bmob SDK
-        Bmob.initialize(this, ApplicationID);
-
+        Bmob.initialize(this, BMOB_ID);
         Logger.init();
+
+        regToWx(this);
     }
 
     /**
@@ -57,5 +64,11 @@ public class HiTomatoApplication extends Application{
             daoSession = daoMaster.newSession();
         }
         return daoSession;
+    }
+
+    private static void regToWx(Context context){
+
+        api = WXAPIFactory.createWXAPI(context, WX_ID, true);
+        api.registerApp(WX_ID);
     }
 }

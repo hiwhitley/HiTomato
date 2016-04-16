@@ -1,0 +1,65 @@
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="2dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_marginTop="2dp"
+                                    app:cardBackgroundColor="@color/white_bg"
+                                    app:cardCornerRadius="10dp"
+                                    app:cardUseCompatPadding="true"
+                                    app:contentPadding="10dp"
+                                    app:elevation="1dp">
+
+    <LinearLayout
+        android:id="@+id/ll_item_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_item_icon"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:backgroundTint="@color/ui_green"
+            android:layout_gravity="center_vertical|left"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/icon_about"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="right"
+            >
+
+            <TextView
+                android:id="@+id/tv_item_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CardView挺好看"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/font_black"
+                android:textSize="18sp"
+                />
+
+            <TextView
+                android:id="@+id/tv_item_duration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="15sec"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/font_pink"
+                android:textSize="15sp"
+                />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

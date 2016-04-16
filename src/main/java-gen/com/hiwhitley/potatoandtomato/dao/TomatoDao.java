@@ -44,7 +44,7 @@ public class TomatoDao extends AbstractDao<Tomato, Long> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"TOMATO\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"CONTENT\" TEXT NOT NULL ," + // 1: content
                 "\"ORDER\" INTEGER," + // 2: order
                 "\"STATUS\" INTEGER," + // 3: status

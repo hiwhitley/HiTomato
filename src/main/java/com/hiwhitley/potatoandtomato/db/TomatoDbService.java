@@ -5,14 +5,9 @@ import android.content.Context;
 import com.hiwhitley.potatoandtomato.base.system.HiTomatoApplication;
 import com.hiwhitley.potatoandtomato.bean.Tomato;
 import com.hiwhitley.potatoandtomato.dao.TomatoDao;
-import com.hiwhitley.potatoandtomato.utils.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import de.greenrobot.dao.query.Query;
-import de.greenrobot.dao.query.QueryBuilder;
-import de.greenrobot.dao.query.WhereCondition;
 
 /**
  * Created by hiwhitley on 2016/4/4.

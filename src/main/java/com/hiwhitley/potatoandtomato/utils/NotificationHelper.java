@@ -71,8 +71,8 @@ public class NotificationHelper {
         init(context);
         if (!isVibrateOn)
             return;
-        vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(new long[]{100,400,100,400,100,400}, -1);
+            vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+            vibrator.vibrate(new long[]{100, 400, 100, 400, 100, 400}, -1);
     }
 
     public static void startAlarm(Context context) {    //播放声音,参数sound是播放音效的id，参数number是播放音效的次数
@@ -80,24 +80,23 @@ public class NotificationHelper {
         init(context);
         if (!isSoundOn)
             return;
-        AudioManager am = (AudioManager) context.getSystemService(context.AUDIO_SERVICE);//实例化AudioManager对象
-        float audioMaxVolumn = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);  //返回当前AudioManager对象的最大音量值
-        float audioCurrentVolumn = am.getStreamVolume(AudioManager.STREAM_MUSIC);//返回当前AudioManager对象的音量值
-        final float volumnRatio = audioCurrentVolumn / audioMaxVolumn;
+            AudioManager am = (AudioManager) context.getSystemService(context.AUDIO_SERVICE);//实例化AudioManager对象
+            float audioMaxVolumn = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);  //返回当前AudioManager对象的最大音量值
+            float audioCurrentVolumn = am.getStreamVolume(AudioManager.STREAM_MUSIC);//返回当前AudioManager对象的音量值
+            final float volumnRatio = audioCurrentVolumn / audioMaxVolumn;
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                sp.play(
-                        spMap.get(soundType),                   //播放的音乐id
-                        volumnRatio,                        //左声道音量
-                        volumnRatio,                        //右声道音量
-                        1,                                  //优先级，0为最低
-                        soundRepeat,                             //循环次数，0无不循环，-1无永远循环
-                        1                                   //回放速度 ，该值在0.5-2.0之间，1为正常速度
-                );
-            }
-        }, 500);
-
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    sp.play(
+                            spMap.get(soundType),                   //播放的音乐id
+                            volumnRatio,                        //左声道音量
+                            volumnRatio,                        //右声道音量
+                            1,                                  //优先级，0为最低
+                            soundRepeat,                             //循环次数，0无不循环，-1无永远循环
+                            1                                   //回放速度 ，该值在0.5-2.0之间，1为正常速度
+                    );
+                }
+            }, 500);
     }
 }

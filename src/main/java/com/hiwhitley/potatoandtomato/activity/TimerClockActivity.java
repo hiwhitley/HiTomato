@@ -11,15 +11,14 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.hiwhitley.potatoandtomato.R;
-import com.hiwhitley.potatoandtomato.fragment.SettingFragment;
+import com.hiwhitley.potatoandtomato.bean.DailyEvent;
+import com.hiwhitley.potatoandtomato.db.DailyEventDbService;
+import com.hiwhitley.potatoandtomato.utils.CalendarUtils;
 import com.hiwhitley.potatoandtomato.utils.FontManager;
-import com.hiwhitley.potatoandtomato.utils.LogUtils;
 import com.hiwhitley.potatoandtomato.utils.NotificationHelper;
-import com.hiwhitley.potatoandtomato.utils.SPUtils;
 import com.hiwhitley.potatoandtomato.widget.CircleTimerView;
 import com.hiwhitley.potatoandtomato.widget.ColorDialog;
 import com.hiwhitley.potatoandtomato.widget.PromptDialog;
-import com.orhanobut.logger.Logger;
 
 
 /**
@@ -28,6 +27,8 @@ import com.orhanobut.logger.Logger;
 public class TimerClockActivity extends AppCompatActivity {
 
     public static final String TITLE_TEXT = "titleText";
+    public static final String TAG = "TimerClockActivity";
+    public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     private Button pauseBtn;
     private Button startBtn;
@@ -38,7 +39,9 @@ public class TimerClockActivity extends AppCompatActivity {
     private PromptDialog promptDialog;
     private ColorDialog colorDialog;
 
+    private  boolean isStart;
     private String titleText;
+    private DailyEvent event;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -99,6 +102,8 @@ public class TimerClockActivity extends AppCompatActivity {
         Log.i("hiwhitley", "titleText:" + titleText);
         titleTextView.setText(titleText);
 
+        isStart = true;
+
     }
 
 
@@ -124,7 +129,12 @@ public class TimerClockActivity extends AppCompatActivity {
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (circleTimerView.getCurrentTime() == 0) {
+                    promptDialog.show();
+                    return;
+                }
                 setPauseStatusViews();
+                insertNewDailyEvent();
             }
         });
 
@@ -145,6 +155,8 @@ public class TimerClockActivity extends AppCompatActivity {
                 colorDialog.show();
                 NotificationHelper.startVibrate(getApplicationContext());
                 NotificationHelper.startAlarm(getApplicationContext());
+                updateEndTime(event);
+                isStart = true;
             }
 
             @Override
@@ -155,6 +167,7 @@ public class TimerClockActivity extends AppCompatActivity {
             @Override
             public void onTimerPause(int time) {
                 Log.i("hiwhitley", "onTimerPause:");
+                isStart = false;
             }
 
             @Override
@@ -178,6 +191,23 @@ public class TimerClockActivity extends AppCompatActivity {
         });
     }
 
+    private void updateEndTime(DailyEvent event) {
+        event.setEndTime(CalendarUtils.getNowTime(DATE_FORMAT));
+        DailyEventDbService.getInstance(getApplicationContext()).updateDailyEvent(event);
+    }
+
+    private void insertNewDailyEvent() {
+        if (isStart) {
+            event = new DailyEvent();
+            event.setName(titleText);
+            event.setStartTime(CalendarUtils.getNowTime(DATE_FORMAT));
+            event.setEndTime("");
+            event.setDuration(CalendarUtils.secToTime(circleTimerView.getCurrentTime()));
+            Log.i(TAG, event.toString());
+            DailyEventDbService.getInstance(getApplicationContext()).insertDailyEvent(event);
+        }
+    }
+
     private void setStartStatusView() {
 
         if (!circleTimerView.isEnabled())
@@ -189,10 +219,6 @@ public class TimerClockActivity extends AppCompatActivity {
     }
 
     private void setPauseStatusViews() {
-        if (circleTimerView.getCurrentTime() == 0) {
-            promptDialog.show();
-            return;
-        }
 
         if (circleTimerView.isEnabled())
             circleTimerView.setEnabled(false);

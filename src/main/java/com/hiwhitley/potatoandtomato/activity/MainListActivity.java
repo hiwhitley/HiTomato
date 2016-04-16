@@ -25,10 +25,10 @@ import com.hiwhitley.potatoandtomato.R;
 import com.hiwhitley.potatoandtomato.base.BaseActivity;
 import com.hiwhitley.potatoandtomato.bean.Tomato;
 import com.hiwhitley.potatoandtomato.db.TomatoDbService;
-import com.hiwhitley.potatoandtomato.fragment.HistoryFragment;
 import com.hiwhitley.potatoandtomato.fragment.HistoryFragment2;
 import com.hiwhitley.potatoandtomato.fragment.RecyclerListFragment;
 import com.hiwhitley.potatoandtomato.fragment.SettingFragment;
+import com.hiwhitley.potatoandtomato.fragment.StatisticFragment;
 import com.hiwhitley.potatoandtomato.utils.FontManager;
 import com.hiwhitley.potatoandtomato.utils.LogUtils;
 import com.hiwhitley.potatoandtomato.widget.ColorDialog;
@@ -89,7 +89,7 @@ public class MainListActivity extends BaseActivity {
 
         manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         promptDialog = new PromptDialog(this).setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
-                .setTitleText("Success").setContentText("Your info text goes here. Loremipsum dolor sit amet, consecteturn adipisicing elit, sed do eiusmod.")
+                .setTitleText(getString(R.string.exit_menu_title)).setContentText(getString(R.string.exit_menu_content))
                 .setPositiveListener("OK", new PromptDialog.OnPositiveListener() {
                     @Override
                     public void onClick(PromptDialog dialog) {
@@ -100,18 +100,17 @@ public class MainListActivity extends BaseActivity {
         colorDialog = new ColorDialog(this);
         colorDialog.setTitle(getString(R.string.exit_menu_title));
         colorDialog.setContentText(getString(R.string.exit_menu_content));
-        colorDialog.setContentImage(getResources().getDrawable(R.mipmap.sample_img));
         colorDialog.setPositiveListener(getString(R.string.cancel_exit), new ColorDialog.OnPositiveListener() {
             @Override
             public void onClick(ColorDialog dialog) {
                 //Toast.makeText(this, dialog.getPositiveText().toString(), Toast.LENGTH_SHORT).show();
-                colorDialog.dismiss();
+                dialog.dismiss();
             }
         }).setNegativeListener(getString(R.string.exit), new ColorDialog.OnNegativeListener() {
             @Override
             public void onClick(ColorDialog dialog) {
                 finish();
-                colorDialog.dismiss();
+                dialog.dismiss();
             }
         });
 
@@ -208,7 +207,7 @@ public class MainListActivity extends BaseActivity {
                 Log.i("hiwhitley", "nav_home");
                 break;
             case R.id.nav_history:
-                startNextView(new HistoryFragment(), "历史统计");
+                startNextView(new StatisticFragment(), "历史统计");
                 mCrossView.setVisibility(View.GONE);
                 break;
             case R.id.nav_setting:
@@ -242,6 +241,8 @@ public class MainListActivity extends BaseActivity {
                 mCrossView.setVisibility(View.GONE);
                 break;
             case R.id.nav_email:
+                startNextView(new StatisticFragment(), "联系我");
+                mCrossView.setVisibility(View.GONE);
                 break;
             case R.id.nav_about:
                 break;

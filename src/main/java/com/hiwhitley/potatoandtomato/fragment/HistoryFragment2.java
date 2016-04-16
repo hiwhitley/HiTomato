@@ -8,16 +8,19 @@ import android.view.ViewGroup;
 
 import com.hiwhitley.potatoandtomato.R;
 import com.hiwhitley.potatoandtomato.base.BaseFragment;
+import com.hiwhitley.potatoandtomato.widget.weekview.MonthLoader;
 import com.hiwhitley.potatoandtomato.widget.weekview.WeekView;
 import com.hiwhitley.potatoandtomato.widget.weekview.WeekViewEvent;
+import com.hiwhitley.potatoandtomato.widget.weekview.WeekViewLoader;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
  * Created by hiwhitley on 2016/4/10.
  */
-public class HistoryFragment2 extends BaseFragment implements WeekView.MonthChangeListener {
+public class HistoryFragment2 extends BaseFragment implements MonthLoader.MonthChangeListener{
 
     private View mRootView;
     private WeekView mWeekView;
@@ -49,9 +52,24 @@ public class HistoryFragment2 extends BaseFragment implements WeekView.MonthChan
     protected void init() {
         mWeekView.setMonthChangeListener(this);
         mWeekViewEvents = new ArrayList<>();
-        mWeekViewEvents.add(new WeekViewEvent(1, "hello", 2016, 1, 1, 7, 30, 2016, 1, 1, 8, 50));
+        WeekViewEvent event = new WeekViewEvent(1, "hello", 2016, 4, 12, 7, 30, 2016, 4, 12, 8, 50);
+        //event.setDayOfWeek(Calendar.MONDAY);
+        mWeekViewEvents.add(event);
 
-        mWeekView.setEvents(mWeekViewEvents);
+
+
+        mWeekView.setWeekViewLoader(new WeekViewLoader() {
+            @Override
+            public double toWeekViewPeriodIndex(Calendar instance) {
+                return 0;
+            }
+
+            @Override
+            public List<? extends WeekViewEvent> onLoad(int periodIndex) {
+                return mWeekViewEvents;
+            }
+        });
+
     }
 
     @Override
@@ -60,7 +78,7 @@ public class HistoryFragment2 extends BaseFragment implements WeekView.MonthChan
     }
 
     @Override
-    public List<WeekViewEvent> onMonthChange(int newYear, int newMonth) {
+    public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
         return null;
     }
 }
