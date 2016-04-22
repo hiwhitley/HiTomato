@@ -7,7 +7,6 @@ import android.widget.Button;
 
 import com.hiwhitley.potatoandtomato.R;
 import com.hiwhitley.potatoandtomato.base.BaseActivity;
-import com.tencent.mm.sdk.modelmsg.SendAuth;
 
 
 /**
@@ -50,11 +49,6 @@ public class LoginActivity extends BaseActivity {
         testBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                final SendAuth.Req req = new SendAuth.Req();
-                req.scope = "snsapi_userinfo";
-                req.state = "wechat_sdk_demo_test";
-                //api.sendReq(req);
 
             }
         });

@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hiwhitley.potatoandtomato.R;
-import com.hiwhitley.potatoandtomato.adapter.viewholer.MainListViewHolder;
+import com.hiwhitley.potatoandtomato.adapter.viewholer.ItemMainListViewHolder;
 import com.hiwhitley.potatoandtomato.bean.Tomato;
 import com.hiwhitley.potatoandtomato.db.TomatoDbService;
 import com.hiwhitley.potatoandtomato.helper.ItemTouchHelperAdapter;
@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * Created by hiwhitley on 2016/4/3.
  */
-public class RecyclerListAdapter extends RecyclerView.Adapter<MainListViewHolder> implements ItemTouchHelperAdapter, View.OnClickListener {
+public class RecyclerListAdapter extends RecyclerView.Adapter<ItemMainListViewHolder> implements ItemTouchHelperAdapter, View.OnClickListener {
 
 
     public static final String TAG = "hiwhitley";
@@ -66,14 +66,14 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<MainListViewHolder
     }
 
     @Override
-    public MainListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ItemMainListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main_list, null);
         view.setOnClickListener(this);
-        return new MainListViewHolder(view);
+        return new ItemMainListViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final MainListViewHolder holder, int position) {
+    public void onBindViewHolder(final ItemMainListViewHolder holder, int position) {
 
         holder.text.setText(mItems.get(position).getContent());
         holder.handle.setTypeface(iconFont);

@@ -11,9 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -130,15 +128,11 @@ public class MainListActivity extends BaseActivity {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-//                toolbar.setTitle("个人中心");//设置Toolbar标题
-//                toolbar.setTitleTextColor(Color.parseColor("#ffffff")); //设置标题颜色
             }
 
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
-//                toolbar.setTitle("");//设置Toolbar标题
-//                toolbar.setTitleTextColor(Color.parseColor("#ffffff")); //设置标题颜色
             }
         };
         mDrawerToggle.syncState();
@@ -154,26 +148,6 @@ public class MainListActivity extends BaseActivity {
             }
         });
 
-        materialEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-//                if (s.length() > 0)
-//                    commitBtn.setVisibility(View.VISIBLE);
-//                else
-//                    commitBtn.setVisibility(View.GONE);
-
-            }
-        });
 
         commitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -257,14 +231,12 @@ public class MainListActivity extends BaseActivity {
         Tomato tomato = new Tomato();
         tomato.setContent(materialEditText.getText().toString());
         tomato.setOrder(TomatoDbService.getInstance(getApplicationContext()).getTomatoMaxOrder() + 1);
-        //tomato.setOrder(2);
         tomato.setTime("today");
         TomatoDbService.getInstance(getApplicationContext()).insertTomato(tomato);
         mRecyclerListFragment.inSertItem(tomato);
         mCrossView.plus();
         crossViewStatus = CrossView.FLAG_STATE_PLUS;
         showNewItemLayout();
-        //hideSoftKeyBoard();
     }
 
     private void hideSoftKeyBoard() {

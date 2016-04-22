@@ -7,8 +7,6 @@ import com.hiwhitley.potatoandtomato.dao.Constants;
 import com.hiwhitley.potatoandtomato.dao.DaoMaster;
 import com.hiwhitley.potatoandtomato.dao.DaoSession;
 import com.orhanobut.logger.Logger;
-import com.tencent.mm.sdk.openapi.IWXAPI;
-import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 import cn.bmob.v3.Bmob;
 
@@ -23,7 +21,6 @@ public class HiTomatoApplication extends Application{
 
     private static DaoMaster daoMaster;
     private static DaoSession daoSession;
-    private static IWXAPI api;
 
     @Override
     public void onCreate() {
@@ -33,7 +30,6 @@ public class HiTomatoApplication extends Application{
         Bmob.initialize(this, BMOB_ID);
         Logger.init();
 
-        regToWx(this);
     }
 
     /**
@@ -66,9 +62,4 @@ public class HiTomatoApplication extends Application{
         return daoSession;
     }
 
-    private static void regToWx(Context context){
-
-        api = WXAPIFactory.createWXAPI(context, WX_ID, true);
-        api.registerApp(WX_ID);
-    }
 }
