@@ -155,6 +155,7 @@ public class TimerClockActivity extends AppCompatActivity {
                 colorDialog.show();
                 NotificationHelper.startVibrate();
                 NotificationHelper.startAlarm();
+                //NotificationHelper.setNotication(getApplicationContext(), null);
                 updateEndTime(event);
                 isStart = true;
             }

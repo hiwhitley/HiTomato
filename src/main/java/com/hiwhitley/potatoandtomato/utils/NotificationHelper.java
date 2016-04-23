@@ -50,7 +50,7 @@ public class NotificationHelper {
 
         isSoundOn = (Boolean) SPUtils.get(context, SettingFragment.IS_SOUND_ON, true);
         Log.i(TAG, "isSoundOn:" + isSoundOn);
-        isVibrateOn = isSoundOn = (Boolean) SPUtils.get(context, SettingFragment.IS_VIBRATE_ON, true);
+        isVibrateOn = (Boolean) SPUtils.get(context, SettingFragment.IS_VIBRATE_ON, true);
         Log.i(TAG, "isVibrateOn:" + isVibrateOn);
         soundType = (int) SPUtils.get(context, SettingFragment.SOUND_TYPE, 0);
         soundRepeat = (int) SPUtils.get(context, SettingFragment.SOUND_REPEAT, 0);
@@ -62,7 +62,9 @@ public class NotificationHelper {
         volumnRatio = audioCurrentVolumn / audioMaxVolumn;
     }
 
-    public static void setNotication(Context context, NotificationManager manager, PendingIntent pendingIntent) {
+    public static void setNotication(Context context,PendingIntent pendingIntent) {
+
+        NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Notification notification = new Notification.Builder(context)
                 .setSmallIcon(R.drawable.icon_balance)
                 .setContentTitle("HiTomato")
@@ -76,6 +78,7 @@ public class NotificationHelper {
                 .getNotification();
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
         manager.notify(NOTIFICATION_FLAG, notification);
+
     }
 
 
