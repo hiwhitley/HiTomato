@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.hiwhitley.potatoandtomato.R;
 import com.hiwhitley.potatoandtomato.adapter.viewholer.ItemMainListViewHolder;
+import com.hiwhitley.potatoandtomato.base.system.HiTomatoApplication;
 import com.hiwhitley.potatoandtomato.bean.Tomato;
 import com.hiwhitley.potatoandtomato.db.TomatoDbService;
 import com.hiwhitley.potatoandtomato.helper.ItemTouchHelperAdapter;
@@ -61,6 +62,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<ItemMainListViewHo
         dbService = TomatoDbService.getInstance(context);
         iconFont = FontManager.getTypeface(context, FontManager.FONTAWESOME);
         mItems = new ArrayList<>();
+        HiTomatoApplication.getDaoSession(context).clear();
         mItems = TomatoDbService.getInstance(context).loadAllTomatoByOrder();
         mStartDragListener = startDragListener;
     }
@@ -122,8 +124,6 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<ItemMainListViewHo
 
     @Override
     public boolean onItemMove(int fromPosition, int toPosition) {
-
-
         //交换mItems数据的位置
         Collections.swap(mItems, fromPosition, toPosition);
         dbService.swapTomato(mItems.get(fromPosition),mItems.get(toPosition));

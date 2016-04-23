@@ -67,7 +67,7 @@ public class TimerClockActivity extends AppCompatActivity {
 
     protected void init() {
 
-       // NotificationHelper.init(getApplicationContext());
+        NotificationHelper.init(getApplicationContext());
 
         Typeface iconFont = FontManager.getTypeface(getApplicationContext(), FontManager.FONTAWESOME);
         FontManager.markAsIconContainer(findViewById(R.id.rl_activity_title), iconFont);
@@ -153,8 +153,8 @@ public class TimerClockActivity extends AppCompatActivity {
                 setStartStatusView();
                 colorDialog.setTitle(titleText);
                 colorDialog.show();
-                NotificationHelper.startVibrate(getApplicationContext());
-                NotificationHelper.startAlarm(getApplicationContext());
+                NotificationHelper.startVibrate();
+                NotificationHelper.startAlarm();
                 updateEndTime(event);
                 isStart = true;
             }

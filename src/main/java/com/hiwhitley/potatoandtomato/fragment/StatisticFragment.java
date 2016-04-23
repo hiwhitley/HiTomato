@@ -28,6 +28,16 @@ public class StatisticFragment extends BaseFragment{
     private ArrayList<WeekViewEvent> mWeekViewEvents;
     private List<DailyEvent> mDailyEvents;
 
+
+    public StatisticFragment(){
+
+    }
+
+    public static StatisticFragment newInstance(){
+        StatisticFragment f = new StatisticFragment();
+        return f;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

@@ -59,6 +59,9 @@ public class MainListActivity extends BaseActivity {
     private LinearLayout mNewItemLayout;
     private NavigationView mNavigationView;
 
+    private Fragment mContent;
+    private FragmentManager fm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +71,11 @@ public class MainListActivity extends BaseActivity {
         setListeners();
     }
 
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        //super.onSaveInstanceState(outState);
+    }
 
     protected void findViews() {
         toolbar = findView(R.id.tl_custom);
@@ -112,11 +120,11 @@ public class MainListActivity extends BaseActivity {
             }
         });
 
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
+
+        fm = getSupportFragmentManager();
         mRecyclerListFragment = new RecyclerListFragment();
-        transaction.replace(R.id.id_content, mRecyclerListFragment);
-        transaction.commit();
+        mContent = mRecyclerListFragment;
+        fm.beginTransaction().add(R.id.id_content, mContent).commit();
 
 
         toolbar.setTitle("首页");//设置Toolbar标题
@@ -169,7 +177,7 @@ public class MainListActivity extends BaseActivity {
     }
 
     private void startNextView(Fragment fragment, String title) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.id_content, fragment).commit();
+        switchContent(mContent, fragment);
         toolbar.setTitle(title);
     }
 
@@ -220,6 +228,18 @@ public class MainListActivity extends BaseActivity {
                 break;
             case R.id.nav_about:
                 break;
+        }
+    }
+
+    public void switchContent(Fragment from, Fragment to) {
+        if (mContent != to) {
+            mContent = to;
+            FragmentTransaction transaction = fm.beginTransaction();
+            if (!to.isAdded()) {    // 先判断是否被add过
+                transaction.hide(from).add(R.id.id_content, to).commit(); // 隐藏当前的fragment，add下一个到Activity中
+            } else {
+                transaction.hide(from).show(to).commit(); // 隐藏当前的fragment，显示下一个
+            }
         }
     }
 
