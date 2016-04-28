@@ -27,6 +27,7 @@ import com.hiwhitley.potatoandtomato.fragment.AboutFragment;
 import com.hiwhitley.potatoandtomato.fragment.RecyclerListFragment;
 import com.hiwhitley.potatoandtomato.fragment.SettingFragment;
 import com.hiwhitley.potatoandtomato.fragment.StatisticFragment;
+import com.hiwhitley.potatoandtomato.fragment.SuggestFragment;
 import com.hiwhitley.potatoandtomato.utils.FontManager;
 import com.hiwhitley.potatoandtomato.widget.ColorDialog;
 import com.hiwhitley.potatoandtomato.widget.CrossView;
@@ -195,6 +196,8 @@ public class MainListActivity extends BaseActivity {
                 mCrossView.setVisibility(View.GONE);
                 break;
             case R.id.nav_email:
+                startNextView(new SuggestFragment(), "意见反馈");
+                mCrossView.setVisibility(View.GONE);
                 break;
             case R.id.nav_about:
                 startNextView(new AboutFragment(), "关于");

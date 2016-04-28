@@ -37,5 +37,7 @@
     <string name="sound_count">通知声音重复</string>
     <string name="sound_type">通知类型</string>
     <string name="version_name">V1.0.0</string>
+    <string name="suggest_qq_or_mail">留下您的QQ或邮箱(选填)</string>
+    <string name="suggest_hind_text">您的建议是我最大的动力</string>
 
 </resources>

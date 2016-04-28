@@ -29,35 +29,12 @@ import java.util.List;
  */
 public class RecyclerListAdapter extends RecyclerView.Adapter<ItemMainListViewHolder> implements ItemTouchHelperAdapter, View.OnClickListener {
 
-
     public static final String TAG = "hiwhitley";
     private OnStartDragListener mStartDragListener;
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
-    private List<Tomato> mItems;
+    private static List<Tomato> mItems;
     private Typeface iconFont;
     private TomatoDbService dbService;
-    private RecyclerView mRecyclerView;
-
-//    @Override
-//    public int getHorizontalRange(RecyclerView.ViewHolder holder) {
-//        if(holder.itemView instanceof LinearLayout){
-//            ViewGroup viewGroup = (ViewGroup) holder.itemView;
-//            if(viewGroup.getChildCount() == 2){
-//                return viewGroup.getChildAt(1).getLayoutParams().width;
-//            }
-//        }
-//        return 0;
-//    }
-//
-//    @Override
-//    public RecyclerView.ViewHolder getChildViewHolder(View childView) {
-//        return mRecyclerView.getChildViewHolder(childView);
-//    }
-//
-//    @Override
-//    public View findTargetView(float x, float y) {
-//        return mRecyclerView.findChildViewUnder(x, y);
-//    }
 
     public RecyclerListAdapter(Context context, OnStartDragListener startDragListener) {
         dbService = TomatoDbService.getInstance(context);
@@ -95,14 +72,6 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<ItemMainListViewHo
         holder.itemView.setTag(mItems.get(position));
     }
 
-//    @Override
-//    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-//        super.onAttachedToRecyclerView(recyclerView);
-//
-//        mRecyclerView = recyclerView;
-//        mRecyclerView.addOnItemTouchListener(new ItemSlideHelper(mRecyclerView.getContext(), this));
-//    }
-
     @Override
     public void onClick(View v) {
         if (mOnItemClickListener != null) {
@@ -115,7 +84,6 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<ItemMainListViewHo
         mItems.add(tomato);
         Log.i(TAG, "addItem" + mItems.size());
         notifyItemInserted(mItems.size() - 1);
-        //notifyDataSetChanged();
     }
 
     @Override
@@ -128,7 +96,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<ItemMainListViewHo
     public boolean onItemMove(int fromPosition, int toPosition) {
         //交换mItems数据的位置
         Collections.swap(mItems, fromPosition, toPosition);
-        dbService.swapTomato(mItems.get(fromPosition),mItems.get(toPosition));
+        dbService.swapTomato(mItems.get(fromPosition), mItems.get(toPosition));
         //交换RecyclerView列表中item的位置
         notifyItemMoved(fromPosition, toPosition);
         return true;
