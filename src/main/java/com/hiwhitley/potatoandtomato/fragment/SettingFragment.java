@@ -26,7 +26,6 @@ public class SettingFragment extends BaseFragment {
     private View mRootView;
     private ShSwitchView mSoundSwitch;
     private ShSwitchView mVibrateSwitch;
-    private ShSwitchView mAlarmSwitch;
 
     private SegmentControl soundRepeat;
     private SegmentControl soundType;
@@ -52,7 +51,6 @@ public class SettingFragment extends BaseFragment {
     protected void findViews() {
         mSoundSwitch = findView(mRootView, R.id.swv_sound);
         mVibrateSwitch = findView(mRootView, R.id.swv_vibrate);
-        mAlarmSwitch = findView(mRootView, R.id.swv_alarm);
 
         soundRepeat = findView(mRootView, R.id.sec_sound_repeat);
         soundType = findView(mRootView, R.id.sec_sound_type);
@@ -62,7 +60,6 @@ public class SettingFragment extends BaseFragment {
 
         mSoundSwitch.setOn((Boolean) getSettingContent(IS_SOUND_ON, true));
         mVibrateSwitch.setOn((Boolean) getSettingContent(IS_VIBRATE_ON, true));
-        mAlarmSwitch.setOn((Boolean) getSettingContent(IS_DAILY_ALARM_ON, true));
 
         soundRepeat.setSelectedIndex((Integer) getSettingContent(SOUND_REPEAT, 0));
         soundType.setSelectedIndex((Integer) getSettingContent(SOUND_TYPE, 0));
@@ -81,13 +78,6 @@ public class SettingFragment extends BaseFragment {
             @Override
             public void onSwitchStateChange(boolean isOn) {
                 SPUtils.put(getActivity(), IS_VIBRATE_ON, isOn);
-            }
-        });
-
-        mAlarmSwitch.setOnSwitchStateChangeListener(new ShSwitchView.OnSwitchStateChangeListener() {
-            @Override
-            public void onSwitchStateChange(boolean isOn) {
-                SPUtils.put(getActivity(), IS_DAILY_ALARM_ON, isOn);
             }
         });
 

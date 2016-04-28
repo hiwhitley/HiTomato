@@ -1,7 +1,6 @@
 package com.hiwhitley.potatoandtomato.fragment;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,13 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hiwhitley.potatoandtomato.R;
 import com.hiwhitley.potatoandtomato.activity.TimerClockActivity;
 import com.hiwhitley.potatoandtomato.adapter.RecyclerListAdapter;
 import com.hiwhitley.potatoandtomato.bean.Tomato;
-import com.hiwhitley.potatoandtomato.helper.LinearItemDecoration;
 import com.hiwhitley.potatoandtomato.helper.OnStartDragListener;
 import com.hiwhitley.potatoandtomato.helper.SimpleItemTouchHelperCallback;
 import com.hiwhitley.potatoandtomato.impl.OnRecyclerViewItemClickListener;
+import com.hiwhitley.potatoandtomato.widget.EmptyRecyclerView;
 
 /**
  * Created by hiwhitley on 2016/4/3.
@@ -27,28 +27,42 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
 
     private ItemTouchHelper mItemTouchHelper;
     private  RecyclerListAdapter adapter;
+    private View mRootView;
+    private EmptyRecyclerView mEmptyRecyclerView;
+    private View mEmptyView;
     public RecyclerListFragment() {
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return new RecyclerView(container.getContext());
+        if (mRootView == null) {
+            mRootView = inflater.inflate(R.layout.fragment_main, container, false);
+            findViews();
+            init();
+            setListener();
+        }
+        //缓存的mRootView需要判断是否已经被加过parent， 如果有parent需要从parent删除，要不然会发生这个mRootView已经有parent的错误。
+        ViewGroup parent = (ViewGroup) mRootView.getParent();
+        if (parent != null) {
+            parent.removeView(mRootView);
+        }
+        return mRootView;
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        adapter = new RecyclerListAdapter(getActivity(), this);
-        //参数view即为我们在onCreateView中return的view
-        RecyclerView recyclerView = (RecyclerView) view;
-        //固定recyclerview大小
-        //recyclerView.setHasFixedSize(true);
+    private void findViews() {
+        mEmptyRecyclerView = (EmptyRecyclerView) mRootView.findViewById(R.id.rv_main);
+        mEmptyView = mRootView.findViewById(R.id.empty_view);
+    }
 
-        //recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        //recyclerView.addItemDecoration(new LinearItemDecoration(Color.BLACK));
+    private void init() {
+    }
+
+    private void setListener() {
+        adapter = new RecyclerListAdapter(getActivity(), this);
         //设置adapter
-        recyclerView.setAdapter(adapter);
+        mEmptyRecyclerView.setEmptyView(mEmptyView);
+        mEmptyRecyclerView.setAdapter(adapter);
 
         adapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
             @Override
@@ -63,15 +77,25 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
 
 
         //设置布局类型为LinearLayoutManager，相当于ListView的样式
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mEmptyRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         //关联ItemTouchHelper和RecyclerView
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
         mItemTouchHelper = new ItemTouchHelper(callback);
-        mItemTouchHelper.attachToRecyclerView(recyclerView);
+        mItemTouchHelper.attachToRecyclerView(mEmptyRecyclerView);
+
     }
 
-    public void inSertItem(Tomato tomato){
+
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+    }
+
+    public void insertItem(Tomato tomato){
         adapter.addItem(tomato);
+       // adapter.notifyDataSetChanged();
     }
 
     @Override

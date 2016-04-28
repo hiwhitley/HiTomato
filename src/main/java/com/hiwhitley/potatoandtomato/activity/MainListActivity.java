@@ -23,22 +23,14 @@ import com.hiwhitley.potatoandtomato.R;
 import com.hiwhitley.potatoandtomato.base.BaseActivity;
 import com.hiwhitley.potatoandtomato.bean.Tomato;
 import com.hiwhitley.potatoandtomato.db.TomatoDbService;
-import com.hiwhitley.potatoandtomato.fragment.HistoryFragment2;
 import com.hiwhitley.potatoandtomato.fragment.RecyclerListFragment;
 import com.hiwhitley.potatoandtomato.fragment.SettingFragment;
 import com.hiwhitley.potatoandtomato.fragment.StatisticFragment;
 import com.hiwhitley.potatoandtomato.utils.FontManager;
-import com.hiwhitley.potatoandtomato.utils.LogUtils;
 import com.hiwhitley.potatoandtomato.widget.ColorDialog;
 import com.hiwhitley.potatoandtomato.widget.CrossView;
 import com.hiwhitley.potatoandtomato.widget.PromptDialog;
 import com.rengwuxian.materialedittext.MaterialEditText;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import cn.bmob.v3.BmobObject;
-import cn.bmob.v3.listener.SaveListener;
 
 /**
  * Created by hiwhitley on 2016/4/2.
@@ -196,35 +188,12 @@ public class MainListActivity extends BaseActivity {
                 startNextView(new SettingFragment(), "基本设置");
                 mCrossView.setVisibility(View.GONE);
                 break;
-            case R.id.nav_upload:
-
-                List<BmobObject> persons = new ArrayList<BmobObject>();
-                List<Tomato> tomatos = TomatoDbService.getInstance(this).loadAllTomato();
-                for (Tomato tomato : tomatos) {
-                    persons.add(tomato);
-                }
-                new BmobObject().insertBatch(this, persons, new SaveListener() {
-                    @Override
-                    public void onSuccess() {
-                        // TODO Auto-generated method stub
-                        LogUtils.i("批量添加成功");
-                    }
-
-                    @Override
-                    public void onFailure(int code, String msg) {
-                        // TODO Auto-generated method stub
-                        LogUtils.i("批量添加失败:" + msg);
-                    }
-                });
-                break;
             case R.id.nav_love:
 
-                startNextView(new HistoryFragment2(), "历史统计");
+                startNextView(new StatisticFragment(), "历史统计");
                 mCrossView.setVisibility(View.GONE);
                 break;
             case R.id.nav_email:
-                startNextView(new StatisticFragment(), "联系我");
-                mCrossView.setVisibility(View.GONE);
                 break;
             case R.id.nav_about:
                 break;
@@ -253,7 +222,7 @@ public class MainListActivity extends BaseActivity {
         tomato.setOrder(TomatoDbService.getInstance(getApplicationContext()).getTomatoMaxOrder() + 1);
         tomato.setTime("today");
         TomatoDbService.getInstance(getApplicationContext()).insertTomato(tomato);
-        mRecyclerListFragment.inSertItem(tomato);
+        mRecyclerListFragment.insertItem(tomato);
         mCrossView.plus();
         crossViewStatus = CrossView.FLAG_STATE_PLUS;
         showNewItemLayout();

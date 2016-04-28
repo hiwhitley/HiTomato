@@ -20,11 +20,6 @@
             android:title="基本设置"
             app:itemBackground="@drawable/btn_bg_gray" />
         <item
-            android:id="@+id/nav_upload"
-            android:icon="@drawable/icon_upload"
-            android:title="同步数据"
-            app:itemBackground="@drawable/btn_bg_gray" />
-        <item
             android:id="@+id/nav_love"
             android:icon="@drawable/icon_love"
             android:title="亲，给个好评"

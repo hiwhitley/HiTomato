@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -112,8 +113,9 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<ItemMainListViewHo
 
     public void addItem(Tomato tomato) {
         mItems.add(tomato);
-        System.out.println( "addItem" + mItems.size());
+        Log.i(TAG, "addItem" + mItems.size());
         notifyItemInserted(mItems.size() - 1);
+        //notifyDataSetChanged();
     }
 
     @Override

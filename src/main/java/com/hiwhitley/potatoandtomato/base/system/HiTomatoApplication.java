@@ -8,15 +8,11 @@ import com.hiwhitley.potatoandtomato.dao.DaoMaster;
 import com.hiwhitley.potatoandtomato.dao.DaoSession;
 import com.orhanobut.logger.Logger;
 
-import cn.bmob.v3.Bmob;
-
 /**
  * Created by hiwhitley on 2016/4/4.
  */
 public class HiTomatoApplication extends Application{
 
-    private static final String BMOB_ID = "2e131033952490ce0bc840523ade2ade";
-    private static final String WX_ID = "2e131033952490ce0bc840523ade2ade";
     private static final String DEFAULT_TAG = "hiwhitley";
 
     private static DaoMaster daoMaster;
@@ -26,8 +22,6 @@ public class HiTomatoApplication extends Application{
     public void onCreate() {
         super.onCreate();
 
-        // 初始化 Bmob SDK
-        Bmob.initialize(this, BMOB_ID);
         Logger.init();
 
     }
