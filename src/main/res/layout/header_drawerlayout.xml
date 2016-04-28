@@ -31,7 +31,7 @@
         android:layout_above="@id/tv_username"
         android:layout_centerInParent="true"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/avator" />
+        android:src="@drawable/icon_strawberry" />
 
 
 </RelativeLayout>

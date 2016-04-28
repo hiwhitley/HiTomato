@@ -19,7 +19,6 @@ public class SettingFragment extends BaseFragment {
 
     public static final String IS_SOUND_ON = "sound";
     public static final String IS_VIBRATE_ON = "vibrate";
-    public static final String IS_DAILY_ALARM_ON = "alarm";
     public static final String SOUND_REPEAT = "sound_repeat";
     public static final String SOUND_TYPE = "sound_type";
 

@@ -23,6 +23,7 @@ import com.hiwhitley.potatoandtomato.R;
 import com.hiwhitley.potatoandtomato.base.BaseActivity;
 import com.hiwhitley.potatoandtomato.bean.Tomato;
 import com.hiwhitley.potatoandtomato.db.TomatoDbService;
+import com.hiwhitley.potatoandtomato.fragment.AboutFragment;
 import com.hiwhitley.potatoandtomato.fragment.RecyclerListFragment;
 import com.hiwhitley.potatoandtomato.fragment.SettingFragment;
 import com.hiwhitley.potatoandtomato.fragment.StatisticFragment;
@@ -196,6 +197,8 @@ public class MainListActivity extends BaseActivity {
             case R.id.nav_email:
                 break;
             case R.id.nav_about:
+                startNextView(new AboutFragment(), "关于");
+                mCrossView.setVisibility(View.GONE);
                 break;
         }
     }
