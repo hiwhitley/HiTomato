@@ -6,7 +6,6 @@ import com.hiwhitley.potatoandtomato.base.system.HiTomatoApplication;
 import com.hiwhitley.potatoandtomato.bean.Tomato;
 import com.hiwhitley.potatoandtomato.dao.TomatoDao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +15,7 @@ public class TomatoDbService {
     private static TomatoDbService instance;
     private static Context appContext;
     private TomatoDao tomatoDao;
+
     public TomatoDbService() {
     }
 
@@ -31,35 +31,32 @@ public class TomatoDbService {
     }
 
 
-    public List<Tomato> loadAllTomato(){
+    public List<Tomato> loadAllTomato() {
         return tomatoDao.loadAll();
     }
 
-    public List<Tomato> loadAllTomatoByOrder(){
-        List<Tomato> list =  tomatoDao.queryBuilder().orderAsc(TomatoDao.Properties.Order).list();
-        if (list.size() == 0)
-            return new ArrayList<Tomato>();
-        else
-            return list;
+    public List<Tomato> loadAllTomatoByOrder() {
+        List<Tomato> list = tomatoDao.queryBuilder().orderAsc(TomatoDao.Properties.Order).list();
+        return list;
     }
 
-    public long insertTomato(Tomato item){
+    public long insertTomato(Tomato item) {
         return tomatoDao.insert(item);
     }
 
-    public int getTomatoMaxOrder(){
-        List<Tomato> list =  tomatoDao.queryBuilder().orderDesc(TomatoDao.Properties.Order).list();
+    public int getTomatoMaxOrder() {
+        List<Tomato> list = tomatoDao.queryBuilder().orderDesc(TomatoDao.Properties.Order).list();
         if (list.size() == 0)
             return 0;
         else
             return list.get(0).getOrder();
     }
 
-    public void deleteTomato(Tomato item){
+    public void deleteTomato(Tomato item) {
         tomatoDao.delete(item);
     }
 
-    public void swapTomato(Tomato from, Tomato to){
+    public void swapTomato(Tomato from, Tomato to) {
         int order = from.getOrder();
         from.setOrder(to.getOrder());
         tomatoDao.update(from);

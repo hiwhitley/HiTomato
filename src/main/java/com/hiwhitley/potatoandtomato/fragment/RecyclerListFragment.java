@@ -95,7 +95,7 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
 
     public void insertItem(Tomato tomato){
         adapter.addItem(tomato);
-       // adapter.notifyDataSetChanged();
+        // adapter.notifyDataSetChanged();
     }
 
     @Override
