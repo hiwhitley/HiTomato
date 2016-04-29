@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 import com.hiwhitley.potatoandtomato.R;
 import com.hiwhitley.potatoandtomato.adapter.viewholer.ItemMainListViewHolder;
-import com.hiwhitley.potatoandtomato.base.system.HiTomatoApplication;
 import com.hiwhitley.potatoandtomato.bean.Tomato;
 import com.hiwhitley.potatoandtomato.db.TomatoDbService;
 import com.hiwhitley.potatoandtomato.helper.ItemTouchHelperAdapter;
@@ -20,7 +19,6 @@ import com.hiwhitley.potatoandtomato.helper.OnStartDragListener;
 import com.hiwhitley.potatoandtomato.impl.OnRecyclerViewItemClickListener;
 import com.hiwhitley.potatoandtomato.utils.FontManager;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -36,13 +34,12 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<ItemMainListViewHo
     private List<Tomato> mItems;
     private Typeface iconFont;
     private TomatoDbService dbService;
-    private RecyclerView mRecyclerView;
+    private Context mContext;
 
     public RecyclerListAdapter(Context context, OnStartDragListener startDragListener) {
+        mContext = context;
         dbService = TomatoDbService.getInstance(context);
         iconFont = FontManager.getTypeface(context, FontManager.FONTAWESOME);
-        mItems = new ArrayList<>();
-        HiTomatoApplication.getDaoSession(context).clear();
         mItems = TomatoDbService.getInstance(context).loadAllTomatoByOrder();
         mStartDragListener = startDragListener;
     }
@@ -85,13 +82,14 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<ItemMainListViewHo
     public void addItem(Tomato tomato) {
         mItems.add(tomato);
         Log.i(TAG, "addItem" + mItems.size());
-        notifyItemInserted(mItems.size() - 1);
+        notifyItemInserted(mItems.size());
         //notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return mItems.size();
+        Log.i(TAG, "getItemCount" + mItems.size());
+        return mItems.size() == 0 ? 0 : mItems.size();
     }
 
 
@@ -99,7 +97,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<ItemMainListViewHo
     public boolean onItemMove(int fromPosition, int toPosition) {
         //交换mItems数据的位置
         Collections.swap(mItems, fromPosition, toPosition);
-        dbService.swapTomato(mItems.get(fromPosition),mItems.get(toPosition));
+        dbService.swapTomato(mItems.get(fromPosition), mItems.get(toPosition));
         //交换RecyclerView列表中item的位置
         notifyItemMoved(fromPosition, toPosition);
         return true;
@@ -111,6 +109,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<ItemMainListViewHo
         dbService.deleteTomato(mItems.get(position));
         mItems.remove(position);
         //删除RecyclerView列表对应item
+        Log.i(TAG, "onItemDismiss" + mItems.size());
         notifyItemRemoved(position);
     }
 

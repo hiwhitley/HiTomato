@@ -3,6 +3,7 @@ package com.hiwhitley.potatoandtomato.widget;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -11,6 +12,7 @@ import android.view.View;
 public class EmptyRecyclerView extends RecyclerView {
 
     private View emptyView;
+  private static final String TAG = "hiwhitley";
 
     final private AdapterDataObserver observer = new AdapterDataObserver() {
         @Override
@@ -20,6 +22,7 @@ public class EmptyRecyclerView extends RecyclerView {
 
         @Override
         public void onItemRangeInserted(int positionStart, int itemCount) {
+            Log.i(TAG, "onItemRangeInserted" + itemCount);
             checkIfEmpty();
         }
 

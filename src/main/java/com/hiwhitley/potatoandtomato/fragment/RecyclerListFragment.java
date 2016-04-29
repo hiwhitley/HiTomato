@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,14 +26,23 @@ import com.hiwhitley.potatoandtomato.widget.EmptyRecyclerView;
  */
 public class RecyclerListFragment extends Fragment implements OnStartDragListener {
 
+    private static final String TAG = "hiwhitley";
     private ItemTouchHelper mItemTouchHelper;
-    private  RecyclerListAdapter adapter;
+    private static RecyclerListAdapter adapter;
     private View mRootView;
     private EmptyRecyclerView mEmptyRecyclerView;
     private View mEmptyView;
     public RecyclerListFragment() {
     }
 
+
+    private RecyclerListAdapter newInstance(){
+        if (adapter == null) {
+            Log.i(TAG, "newInstance");
+            return new RecyclerListAdapter(getActivity(), this);
+        }
+        return adapter;
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,7 +69,7 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
     }
 
     private void setListener() {
-        adapter = new RecyclerListAdapter(getActivity(), this);
+        adapter = newInstance();
         //设置adapter
         mEmptyRecyclerView.setEmptyView(mEmptyView);
         mEmptyRecyclerView.setAdapter(adapter);
@@ -82,9 +92,7 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
         mItemTouchHelper = new ItemTouchHelper(callback);
         mItemTouchHelper.attachToRecyclerView(mEmptyRecyclerView);
-
     }
-
 
 
     @Override
