@@ -16,10 +16,10 @@
 
             <ImageView
                 android:id="@+id/iv_icon"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_centerHorizontal="true"
-                android:src="@mipmap/icon_launcher"/>
+                android:src="@drawable/alipay"/>
 
             <TextView
                 android:id="@+id/tv_version"
@@ -41,7 +41,7 @@
                 android:lineSpacingExtra="5dp"
                 android:paddingLeft="30dp"
                 android:paddingRight="30dp"
-                android:text="        应用中展示的所有内容均搜集自互联网，若内容有侵权请联系作者进行删除处理。本应用仅用作分享与学习，若转载须征得本人同意。"
+                android:text="        本应用仅用作分享与学习，若内容有侵权请联系作者进行删除处理，若转载须征得本人同意。如果您想鼓励下我，可以扫描上面的二维码，您的鼓励就是我最大的动力！"
                 android:textColor="@color/font_black"
                 android:textSize="14sp"/>
 
@@ -188,12 +188,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="1px"
                     android:layout_marginTop="5dp"
+                    android:visibility="gone"
                     android:background="@color/grey_bg"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="5dp"
+                    android:visibility="gone"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -207,7 +209,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="支付宝：18042012439，请鼓励一下"
+                        android:text="打赏一下我"
                         android:textColor="@color/font_black"
                         android:textIsSelectable="true"
                         android:textSize="14sp"/>

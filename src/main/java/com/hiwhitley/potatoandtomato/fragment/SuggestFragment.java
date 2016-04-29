@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.hiwhitley.potatoandtomato.R;
 import com.hiwhitley.potatoandtomato.base.BaseFragment;
 import com.hiwhitley.potatoandtomato.bean.Suggest;
+import com.hiwhitley.potatoandtomato.utils.KeyBoardUtils;
 
 import cn.bmob.v3.listener.SaveListener;
 
@@ -71,6 +72,7 @@ public class SuggestFragment extends BaseFragment{
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                KeyBoardUtils.closeKeybord(mTiSuggest.getEditText(), getContext());
                 String msg = mTiSuggest.getEditText().getText().toString();
                 if(TextUtils.isEmpty(msg)){
                     Snackbar.make(mRootView, R.string.dont_no_text, Snackbar.LENGTH_SHORT).show();
@@ -84,6 +86,10 @@ public class SuggestFragment extends BaseFragment{
                             @Override
                             public void onSuccess() {
                                 isPosting = false;
+                                mTiMailOrQq.getEditText().setText("");
+                                mTiMailOrQq.getEditText().setFocusable(false);
+                                mTiSuggest.getEditText().setText("");
+                                mTiSuggest.getEditText().setFocusable(false);
                                 Snackbar.make(mRootView, R.string.thx, Toast.LENGTH_SHORT).show();
                             }
 

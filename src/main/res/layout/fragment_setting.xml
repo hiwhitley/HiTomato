@@ -132,11 +132,14 @@
             app:tintColor="@color/ui_green" />
     </RelativeLayout>
 
-    <View style="@style/divider_vertical" />
+    <View
+        android:visibility="gone"
+        style="@style/divider_vertical" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:padding="10dp">
 
         <ImageView

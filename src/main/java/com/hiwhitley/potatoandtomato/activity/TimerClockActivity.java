@@ -94,6 +94,7 @@ public class TimerClockActivity extends AppCompatActivity {
             @Override
             public void onClick(ColorDialog dialog) {
                 finish();
+                circleTimerView.pauseTimer();
                 colorDialog.dismiss();
             }
         });
@@ -123,6 +124,7 @@ public class TimerClockActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+                circleTimerView.pauseTimer();
             }
         });
 
@@ -150,14 +152,17 @@ public class TimerClockActivity extends AppCompatActivity {
             @Override
             public void onTimerStop() {
                 Log.i("hiwhitley", "onTimerStop:");
-                setStartStatusView();
-                colorDialog.setTitle(titleText);
-                colorDialog.show();
-                NotificationHelper.startVibrate();
-                NotificationHelper.startAlarm();
-                //NotificationHelper.setNotication(getApplicationContext(), null);
-                updateEndTime(event);
-                isStart = true;
+                if(!(TimerClockActivity.this).isFinishing()){
+                    setStartStatusView();
+                    colorDialog.setTitle(titleText);
+                    colorDialog.show();
+                    NotificationHelper.startVibrate();
+                    NotificationHelper.startAlarm();
+                    NotificationHelper.setNotication(getApplicationContext(), null);
+                    updateEndTime(event);
+                    isStart = true;
+                }
+
             }
 
             @Override
@@ -194,7 +199,7 @@ public class TimerClockActivity extends AppCompatActivity {
 
     private void updateEndTime(DailyEvent event) {
         event.setEndTime(CalendarUtils.getNowTime(DATE_FORMAT));
-        DailyEventDbService.getInstance(getApplicationContext()).updateDailyEvent(event);
+        DailyEventDbService.getInstance(getApplicationContext()).insertDailyEvent(event);
     }
 
     private void insertNewDailyEvent() {
@@ -205,7 +210,7 @@ public class TimerClockActivity extends AppCompatActivity {
             event.setEndTime("");
             event.setDuration(CalendarUtils.secToTime(circleTimerView.getCurrentTime()));
             Log.i(TAG, event.toString());
-            DailyEventDbService.getInstance(getApplicationContext()).insertDailyEvent(event);
+            //DailyEventDbService.getInstance(getApplicationContext()).insertDailyEvent(event);
         }
     }
 

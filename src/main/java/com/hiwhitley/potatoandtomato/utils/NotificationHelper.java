@@ -6,7 +6,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.SoundPool;
-import android.net.Uri;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.util.Log;
@@ -67,9 +66,8 @@ public class NotificationHelper {
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Notification notification = new Notification.Builder(context)
                 .setSmallIcon(R.drawable.icon_balance)
-                .setContentTitle("HiTomato")
-                .setSound(Uri.parse("android.resource://" + context.getPackageName()
-                        + "/" + R.raw.alarm))
+                .setContentTitle("Hi番茄")
+                //.setSound(Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.alarm))
                 .setVibrate(new long[]{0, 500})
                 .setContentText("你已成功完成了一个番茄，赶紧休息一下吧！")
                 .setTicker("你已成功完成了一个番茄，赶紧休息一下吧！")
