@@ -2,12 +2,20 @@ package com.hiwhitley.potatoandtomato.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.hiwhitley.potatoandtomato.R;
 import com.hiwhitley.potatoandtomato.base.BaseFragment;
+import com.hiwhitley.potatoandtomato.bean.Suggest;
+
+import cn.bmob.v3.listener.SaveListener;
 
 /**
  * Created by hiwhitley on 2016/4/13.
@@ -15,6 +23,11 @@ import com.hiwhitley.potatoandtomato.base.BaseFragment;
 public class SuggestFragment extends BaseFragment{
 
     private View mRootView;
+    //防止多次提交数据
+    private boolean isPosting = false;
+
+    private Button sendBtn;
+    private TextInputLayout mTiSuggest,mTiMailOrQq;
 
     public SuggestFragment(){
 
@@ -44,6 +57,9 @@ public class SuggestFragment extends BaseFragment{
 
     @Override
     protected void findViews() {
+        sendBtn = (Button) mRootView.findViewById(R.id.btn_send);
+        mTiSuggest = (TextInputLayout) mRootView.findViewById(R.id.ti_suggest);
+        mTiMailOrQq = (TextInputLayout) mRootView.findViewById(R.id.ti_email_or_qq);
     }
 
     @Override
@@ -52,6 +68,36 @@ public class SuggestFragment extends BaseFragment{
 
     @Override
     protected void setListener() {
+        sendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String msg = mTiSuggest.getEditText().getText().toString();
+                if(TextUtils.isEmpty(msg)){
+                    Snackbar.make(mRootView, R.string.dont_no_text, Snackbar.LENGTH_SHORT).show();
+                }else{
+                    Suggest suggest = new Suggest();
+                    suggest.setMsg(msg);
+                    suggest.setMailOrQQ(mTiMailOrQq.getEditText().getText().toString());
+                    if(!isPosting) {
+                        isPosting = true;
+                        suggest.save(getActivity(), new SaveListener() {
+                            @Override
+                            public void onSuccess() {
+                                isPosting = false;
+                                Snackbar.make(mRootView, R.string.thx, Toast.LENGTH_SHORT).show();
+                            }
 
+                            @Override
+                            public void onFailure(int i, String s) {
+                                isPosting = false;
+                                Snackbar.make(mRootView, R.string.sugesst_error, Snackbar.LENGTH_SHORT).show();
+                            }
+                        });
+                    }else{
+                        Snackbar.make(mRootView, R.string.dont_repeat, Snackbar.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
     }
 }

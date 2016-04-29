@@ -4,11 +4,14 @@
               android:layout_height="match_parent"
               android:background="@color/grey_bg">
 
-    <android.support.v7.widget.RecyclerView
+    <com.hiwhitley.potatoandtomato.widget.EmptyRecyclerView
         android:id="@+id/rv_statistic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/grey_bg">
-    </android.support.v7.widget.RecyclerView>
+    </com.hiwhitley.potatoandtomato.widget.EmptyRecyclerView>
 
+    <include
+        android:id="@+id/empty_view"
+        layout="@layout/layout_empty_view"/>
 </LinearLayout>

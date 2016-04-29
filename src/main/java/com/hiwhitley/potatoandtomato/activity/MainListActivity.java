@@ -15,7 +15,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -29,6 +28,7 @@ import com.hiwhitley.potatoandtomato.fragment.SettingFragment;
 import com.hiwhitley.potatoandtomato.fragment.StatisticFragment;
 import com.hiwhitley.potatoandtomato.fragment.SuggestFragment;
 import com.hiwhitley.potatoandtomato.utils.FontManager;
+import com.hiwhitley.potatoandtomato.utils.KeyBoardUtils;
 import com.hiwhitley.potatoandtomato.widget.ColorDialog;
 import com.hiwhitley.potatoandtomato.widget.CrossView;
 import com.hiwhitley.potatoandtomato.widget.PromptDialog;
@@ -234,16 +234,16 @@ public class MainListActivity extends BaseActivity {
         showNewItemLayout();
     }
 
-    private void hideSoftKeyBoard() {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(materialEditText.getWindowToken(), 0);
-    }
+//    private void hideSoftKeyBoard() {
+//        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//        imm.hideSoftInputFromWindow(materialEditText.getWindowToken(), 0);
+//    }
 
     private void showNewItemLayout() {
         int flag = (crossViewStatus == CrossView.FLAG_STATE_PLUS ? View.GONE : View.VISIBLE);
         materialEditText.setText("");
         mNewItemLayout.setVisibility(flag);
-        hideSoftKeyBoard();
+        KeyBoardUtils.closeKeybord(materialEditText, this);
     }
 
     public <T extends View> T findView(int resId) {

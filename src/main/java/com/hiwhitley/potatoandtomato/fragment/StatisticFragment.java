@@ -3,7 +3,6 @@ package com.hiwhitley.potatoandtomato.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,7 @@ import com.hiwhitley.potatoandtomato.adapter.StatisticAdapter;
 import com.hiwhitley.potatoandtomato.base.BaseFragment;
 import com.hiwhitley.potatoandtomato.bean.DailyEvent;
 import com.hiwhitley.potatoandtomato.db.DailyEventDbService;
+import com.hiwhitley.potatoandtomato.widget.EmptyRecyclerView;
 import com.hiwhitley.potatoandtomato.widget.weekview.WeekViewEvent;
 
 import java.util.ArrayList;
@@ -24,9 +24,11 @@ import java.util.List;
 public class StatisticFragment extends BaseFragment{
 
     private View mRootView;
-    private RecyclerView mRecyclerView;
+    private View mEmptyView;
+    private EmptyRecyclerView mRecyclerView;
     private ArrayList<WeekViewEvent> mWeekViewEvents;
     private List<DailyEvent> mDailyEvents;
+    private StatisticAdapter mStatisticAdapter;
 
 
     public StatisticFragment(){
@@ -57,19 +59,20 @@ public class StatisticFragment extends BaseFragment{
 
     @Override
     protected void findViews() {
+        mEmptyView = findView(mRootView, R.id.empty_view);
         mRecyclerView = findView(mRootView, R.id.rv_statistic);
     }
 
     @Override
     protected void init() {
         mDailyEvents = DailyEventDbService.getInstance(getActivity()).loadAllDailyEvent();
-        StatisticAdapter mStatisticAdapter = new StatisticAdapter(getActivity(), mDailyEvents);
-        mRecyclerView.setAdapter(mStatisticAdapter);
+        mStatisticAdapter = new StatisticAdapter(getActivity(), mDailyEvents);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     @Override
     protected void setListener() {
-
+        mRecyclerView.setEmptyView(mEmptyView);
+        mRecyclerView.setAdapter(mStatisticAdapter);
     }
 }

@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/suggest_qq_or_mail"
             android:maxLength="500"
-            android:textSize="13sp" />
+            android:textSize="13sp"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -34,8 +34,19 @@
             android:layout_height="wrap_content"
             android:hint="@string/suggest_hind_text"
             android:maxLength="500"
-            android:textSize="13sp" />
+            android:textSize="13sp"/>
     </android.support.design.widget.TextInputLayout>
 
+    <Button
+        android:id="@+id/btn_send"
+        android:layout_width="80dp"
+        android:layout_alignParentRight="true"
+        android:layout_height="40dp"
+        android:layout_below="@+id/ti_suggest"
+        android:background="@drawable/btn_bg_green_solid"
+        android:layout_marginRight="25dp"
+        android:text="发送"
+        android:textColor="@color/font_white"
+        />
 
 </RelativeLayout>

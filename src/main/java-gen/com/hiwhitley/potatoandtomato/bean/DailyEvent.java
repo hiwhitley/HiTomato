@@ -79,14 +79,4 @@ public class DailyEvent {
         this.duration = duration;
     }
 
-    @Override
-    public String toString() {
-        return "DailyEvent{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", startTime='" + startTime + '\'' +
-                ", endTime='" + endTime + '\'' +
-                ", duration='" + duration + '\'' +
-                '}';
-    }
 }

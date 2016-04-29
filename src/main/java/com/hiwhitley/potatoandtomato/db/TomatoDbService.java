@@ -6,6 +6,7 @@ import com.hiwhitley.potatoandtomato.base.system.HiTomatoApplication;
 import com.hiwhitley.potatoandtomato.bean.Tomato;
 import com.hiwhitley.potatoandtomato.dao.TomatoDao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,7 +37,7 @@ public class TomatoDbService {
     }
 
     public List<Tomato> loadAllTomatoByOrder() {
-        List<Tomato> list = tomatoDao.queryBuilder().orderAsc(TomatoDao.Properties.Order).list();
+        List<Tomato> list = new ArrayList<>(tomatoDao.queryBuilder().orderAsc(TomatoDao.Properties.Order).list());
         return list;
     }
 

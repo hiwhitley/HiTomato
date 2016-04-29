@@ -22,6 +22,7 @@ import com.hiwhitley.potatoandtomato.utils.FontManager;
 import java.util.Collections;
 import java.util.List;
 
+
 /**
  * Created by hiwhitley on 2016/4/3.
  */
@@ -34,10 +35,8 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<ItemMainListViewHo
     private List<Tomato> mItems;
     private Typeface iconFont;
     private TomatoDbService dbService;
-    private Context mContext;
 
     public RecyclerListAdapter(Context context, OnStartDragListener startDragListener) {
-        mContext = context;
         dbService = TomatoDbService.getInstance(context);
         iconFont = FontManager.getTypeface(context, FontManager.FONTAWESOME);
         mItems = TomatoDbService.getInstance(context).loadAllTomatoByOrder();

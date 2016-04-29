@@ -37,7 +37,12 @@
     <string name="sound_count">通知声音重复</string>
     <string name="sound_type">通知类型</string>
     <string name="version_name">V1.0.0</string>
+
     <string name="suggest_qq_or_mail">留下您的QQ或邮箱(选填)</string>
     <string name="suggest_hind_text">您的建议是我最大的动力</string>
+    <string name="dont_no_text">Sorry,不能提交空白信息T_T</string>
+    <string name="thx">非常感谢您的建议，我会做得更好</string>
+    <string name="sugesst_error">信息反馈失败请重试T_T</string>
+    <string name="dont_repeat">您宝贵的意见正在提交中哦，请不要重复提交</string>
 
 </resources>
