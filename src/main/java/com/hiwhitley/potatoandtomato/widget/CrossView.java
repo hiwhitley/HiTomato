@@ -234,8 +234,9 @@ public class CrossView extends View {
     /**
      * Transition to "+"
      */
-    public void plus() {
+    public int plus() {
         plus(ANIMATION_DURATION_MS);
+        return FLAG_STATE_PLUS;
     }
 
     /**

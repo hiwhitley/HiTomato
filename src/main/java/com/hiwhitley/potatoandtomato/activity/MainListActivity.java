@@ -55,6 +55,7 @@ public class MainListActivity extends BaseActivity {
 
     private Fragment mContent;
     private FragmentManager fm;
+    private int position = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,11 +131,16 @@ public class MainListActivity extends BaseActivity {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
+                crossViewStatus = mCrossView.plus();
+                showNewItemLayout();
+                mCrossView.setVisibility(View.GONE);
             }
 
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
+                if (position == 0)
+                    mCrossView.setVisibility(View.VISIBLE);
             }
         };
         mDrawerToggle.syncState();
@@ -179,28 +185,34 @@ public class MainListActivity extends BaseActivity {
         switch (menuItem.getItemId()) {
             case R.id.nav_home:
                 startNextView(new RecyclerListFragment(), "首页");
+                position = 0;
                 mCrossView.setVisibility(View.VISIBLE);
                 Log.i("hiwhitley", "nav_home");
                 break;
             case R.id.nav_history:
                 startNextView(new StatisticFragment(), "历史统计");
+                position = 1;
                 mCrossView.setVisibility(View.GONE);
                 break;
             case R.id.nav_setting:
                 startNextView(new SettingFragment(), "基本设置");
+                position = 2;
                 mCrossView.setVisibility(View.GONE);
                 break;
             case R.id.nav_love:
 
                 startNextView(new StatisticFragment(), "历史统计");
+                position = 3;
                 mCrossView.setVisibility(View.GONE);
                 break;
             case R.id.nav_email:
                 startNextView(new SuggestFragment(), "意见反馈");
+                position = 4;
                 mCrossView.setVisibility(View.GONE);
                 break;
             case R.id.nav_about:
                 startNextView(new AboutFragment(), "关于");
+                position = 5;
                 mCrossView.setVisibility(View.GONE);
                 break;
         }
@@ -229,21 +241,27 @@ public class MainListActivity extends BaseActivity {
         tomato.setTime("today");
         TomatoDbService.getInstance(getApplicationContext()).insertTomato(tomato);
         mRecyclerListFragment.insertItem(tomato);
-        mCrossView.plus();
-        crossViewStatus = CrossView.FLAG_STATE_PLUS;
+
+        crossViewStatus = mCrossView.plus();
         showNewItemLayout();
     }
 
-//    private void hideSoftKeyBoard() {
-//        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//        imm.hideSoftInputFromWindow(materialEditText.getWindowToken(), 0);
-//    }
-
     private void showNewItemLayout() {
         int flag = (crossViewStatus == CrossView.FLAG_STATE_PLUS ? View.GONE : View.VISIBLE);
-        materialEditText.setText("");
-        mNewItemLayout.setVisibility(flag);
-        KeyBoardUtils.closeKeybord(materialEditText, this);
+        if (flag == View.GONE) {
+            materialEditText.setText("");
+            mNewItemLayout.setVisibility(View.GONE);
+            KeyBoardUtils.closeKeybord(materialEditText, this);
+        } else {
+            materialEditText.setFocusable(true);
+            materialEditText.setFocusableInTouchMode(true);
+            materialEditText.requestFocus();
+            mNewItemLayout.setVisibility(View.VISIBLE);
+            KeyBoardUtils.openKeybord(materialEditText, this);
+        }
+
+
+
     }
 
     public <T extends View> T findView(int resId) {
