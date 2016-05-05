@@ -53,7 +53,7 @@ public class NotificationHelper {
         Log.i(TAG, "isVibrateOn:" + isVibrateOn);
         soundType = (int) SPUtils.get(context, SettingFragment.SOUND_TYPE, 0);
         soundRepeat = (int) SPUtils.get(context, SettingFragment.SOUND_REPEAT, 0);
-
+        Log.i(TAG, "soundRepeat:" + soundRepeat);
         vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         AudioManager am = (AudioManager) context.getSystemService(context.AUDIO_SERVICE);//实例化AudioManager对象
         float audioMaxVolumn = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);  //返回当前AudioManager对象的最大音量值
@@ -65,7 +65,7 @@ public class NotificationHelper {
 
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Notification notification = new Notification.Builder(context)
-                .setSmallIcon(R.drawable.icon_balance)
+                .setSmallIcon(R.mipmap.icon_launcher)
                 .setContentTitle("Hi番茄")
                 //.setSound(Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.alarm))
                 .setVibrate(new long[]{0, 500})

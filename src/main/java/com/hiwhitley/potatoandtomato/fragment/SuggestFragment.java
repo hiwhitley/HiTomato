@@ -8,13 +8,16 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.hiwhitley.potatoandtomato.R;
 import com.hiwhitley.potatoandtomato.base.BaseFragment;
+import com.hiwhitley.potatoandtomato.base.system.Constants;
 import com.hiwhitley.potatoandtomato.bean.Suggest;
 import com.hiwhitley.potatoandtomato.utils.KeyBoardUtils;
+import com.hiwhitley.potatoandtomato.widget.animation.MoveAnimation;
 
 import cn.bmob.v3.listener.SaveListener;
 
@@ -37,6 +40,11 @@ public class SuggestFragment extends BaseFragment{
     public static SuggestFragment newInstance(){
         SuggestFragment f = new SuggestFragment();
         return f;
+    }
+
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        return MoveAnimation.create(MoveAnimation.LEFT, enter, Constants.DURATION);
     }
 
     @Nullable

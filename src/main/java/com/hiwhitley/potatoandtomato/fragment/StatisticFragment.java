@@ -6,16 +6,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 
 import com.hiwhitley.potatoandtomato.R;
 import com.hiwhitley.potatoandtomato.adapter.StatisticAdapter;
 import com.hiwhitley.potatoandtomato.base.BaseFragment;
+import com.hiwhitley.potatoandtomato.base.system.Constants;
 import com.hiwhitley.potatoandtomato.bean.DailyEvent;
 import com.hiwhitley.potatoandtomato.db.DailyEventDbService;
 import com.hiwhitley.potatoandtomato.widget.EmptyRecyclerView;
-import com.hiwhitley.potatoandtomato.widget.weekview.WeekViewEvent;
+import com.hiwhitley.potatoandtomato.widget.animation.MoveAnimation;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,7 +27,6 @@ public class StatisticFragment extends BaseFragment{
     private View mRootView;
     private View mEmptyView;
     private EmptyRecyclerView mRecyclerView;
-    private ArrayList<WeekViewEvent> mWeekViewEvents;
     private List<DailyEvent> mDailyEvents;
     private StatisticAdapter mStatisticAdapter;
 
@@ -38,6 +38,11 @@ public class StatisticFragment extends BaseFragment{
     public static StatisticFragment newInstance(){
         StatisticFragment f = new StatisticFragment();
         return f;
+    }
+
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        return MoveAnimation.create(MoveAnimation.LEFT, enter, Constants.DURATION);
     }
 
     @Nullable

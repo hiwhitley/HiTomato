@@ -11,15 +11,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 
 import com.hiwhitley.potatoandtomato.R;
 import com.hiwhitley.potatoandtomato.activity.TimerClockActivity;
 import com.hiwhitley.potatoandtomato.adapter.RecyclerListAdapter;
+import com.hiwhitley.potatoandtomato.base.system.Constants;
 import com.hiwhitley.potatoandtomato.bean.Tomato;
 import com.hiwhitley.potatoandtomato.helper.OnStartDragListener;
 import com.hiwhitley.potatoandtomato.helper.SimpleItemTouchHelperCallback;
 import com.hiwhitley.potatoandtomato.impl.OnRecyclerViewItemClickListener;
 import com.hiwhitley.potatoandtomato.widget.EmptyRecyclerView;
+import com.hiwhitley.potatoandtomato.widget.animation.MoveAnimation;
 
 /**
  * Created by hiwhitley on 2016/4/3.
@@ -35,7 +38,6 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
     public RecyclerListFragment() {
     }
 
-
     private RecyclerListAdapter newInstance(){
         if (adapter == null) {
             Log.i(TAG, "newInstance");
@@ -43,6 +45,12 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
         }
         return adapter;
     }
+
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        return MoveAnimation.create(MoveAnimation.LEFT, enter, Constants.DURATION);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -5,9 +5,12 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 
 import com.hiwhitley.potatoandtomato.R;
 import com.hiwhitley.potatoandtomato.base.BaseFragment;
+import com.hiwhitley.potatoandtomato.base.system.Constants;
+import com.hiwhitley.potatoandtomato.widget.animation.MoveAnimation;
 
 /**
  * Created by hiwhitley on 2016/4/13.
@@ -20,9 +23,15 @@ public class AboutFragment extends BaseFragment{
 
     }
 
+
     public static AboutFragment newInstance(){
         AboutFragment f = new AboutFragment();
         return f;
+    }
+
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        return MoveAnimation.create(MoveAnimation.LEFT, enter, Constants.DURATION);
     }
 
     @Nullable

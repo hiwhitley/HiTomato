@@ -5,12 +5,15 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 
 import com.hiwhitley.potatoandtomato.R;
 import com.hiwhitley.potatoandtomato.base.BaseFragment;
+import com.hiwhitley.potatoandtomato.base.system.Constants;
 import com.hiwhitley.potatoandtomato.utils.SPUtils;
 import com.hiwhitley.potatoandtomato.widget.SegmentControl;
 import com.hiwhitley.potatoandtomato.widget.ShSwitchView;
+import com.hiwhitley.potatoandtomato.widget.animation.MoveAnimation;
 
 /**
  * Created by hiwhitley on 2016/4/7.
@@ -28,6 +31,15 @@ public class SettingFragment extends BaseFragment {
 
     private SegmentControl soundRepeat;
     private SegmentControl soundType;
+
+    public SettingFragment() {
+
+    }
+
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        return MoveAnimation.create(MoveAnimation.LEFT, enter, Constants.DURATION);
+    }
 
     @Nullable
     @Override

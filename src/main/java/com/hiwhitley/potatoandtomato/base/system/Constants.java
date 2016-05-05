@@ -19,4 +19,6 @@ public class Constants {
     public static final String THURSDAY = "星期四";
     public static final String FRIDAY = "星期五";
     public static final String SATURDAY = "星期六";
+
+    public static final int DURATION = 500;
 }
