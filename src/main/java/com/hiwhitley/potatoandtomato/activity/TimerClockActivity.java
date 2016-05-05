@@ -74,6 +74,7 @@ public class TimerClockActivity extends AppCompatActivity {
 
         promptDialog = new PromptDialog(this).setDialogType(PromptDialog.DIALOG_TYPE_WARNING)
                 .setTitleText("温馨提示").setContentText("请先设置番茄时间")
+                .setAnimationEnable(true)
                 .setPositiveListener("好的", new PromptDialog.OnPositiveListener() {
                     @Override
                     public void onClick(PromptDialog dialog) {
@@ -84,6 +85,7 @@ public class TimerClockActivity extends AppCompatActivity {
         colorDialog = new ColorDialog(this);
         //colorDialog.setTitle("");
         colorDialog.setContentText("先休息一下吧");
+        colorDialog.setAnimationEnable(true);
         colorDialog.setPositiveListener("取消", new ColorDialog.OnPositiveListener() {
             @Override
             public void onClick(ColorDialog dialog) {

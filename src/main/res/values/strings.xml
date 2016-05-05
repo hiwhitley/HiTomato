@@ -1,35 +1,14 @@
 <resources>
     <string name="app_name">HiTomato</string>
-
-    <!-- Strings related to login -->
-    <string name="prompt_email">用户名</string>
-    <string name="prompt_password">密码</string>
-    <string name="action_sign_in">登录</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
-
-    <string name="balance">余额</string>
     <string name="item_hint">我想...</string>
-    <string name="my_balance">余额充值</string>
-    <string name="my_bills">我的订单</string>
-    <string name="fulfill">充值</string>
     <string name="start">开始</string>
     <string name="pause">暂停</string>
-    <string name="drawerlayout_title">个人中心</string>
-    <string name="scan_text">将二维码放入框内, 即可自动扫描</string>
-    <string name="tip_double_click_exit">再按一次退出</string>
-
+    <string name="drawer_title">个人中心</string>
     <string name="drawer_open">""</string>
-    <string name="exit">退出</string>
+    <string name="exit">离开</string>
     <string name="cancel_exit">取消</string>
     <string name="exit_menu_title">HiTomato</string>
-    <string name="exit_menu_content">确定退出吗？</string>
+    <string name="exit_menu_content">确定离开我吗？</string>
     <string name="setting_sound">声音设置</string>
     <string name="setting_vibrate">震动</string>
     <string name="setting_theme_color">主题色</string>

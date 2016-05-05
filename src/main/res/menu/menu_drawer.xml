@@ -24,6 +24,7 @@
             android:id="@+id/nav_love"
             android:icon="@drawable/icon_love"
             android:title="亲，给个好评"
+            android:visible="false"
             app:itemBackground="@drawable/btn_bg_gray" />
         <item
             android:id="@+id/nav_email"

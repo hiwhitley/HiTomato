@@ -1,7 +1,5 @@
 package com.hiwhitley.potatoandtomato.activity;
 
-import android.app.NotificationManager;
-import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -31,7 +29,6 @@ import com.hiwhitley.potatoandtomato.utils.FontManager;
 import com.hiwhitley.potatoandtomato.utils.KeyBoardUtils;
 import com.hiwhitley.potatoandtomato.widget.ColorDialog;
 import com.hiwhitley.potatoandtomato.widget.CrossView;
-import com.hiwhitley.potatoandtomato.widget.PromptDialog;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 /**
@@ -46,8 +43,6 @@ public class MainListActivity extends BaseActivity {
     private CrossView mCrossView;
     private Button commitBtn;
     private int crossViewStatus = CrossView.FLAG_STATE_PLUS;
-    private NotificationManager manager;
-    private PromptDialog promptDialog;
     private ColorDialog colorDialog;
     private MaterialEditText materialEditText;
     private LinearLayout mNewItemLayout;
@@ -87,20 +82,10 @@ public class MainListActivity extends BaseActivity {
         Typeface iconFont = FontManager.getTypeface(getApplicationContext(), FontManager.FONTAWESOME);
         FontManager.markAsIconContainer(findViewById(R.id.ll_new_tomato), iconFont);
 
-
-        manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        promptDialog = new PromptDialog(this).setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
-                .setTitleText(getString(R.string.exit_menu_title)).setContentText(getString(R.string.exit_menu_content))
-                .setPositiveListener("OK", new PromptDialog.OnPositiveListener() {
-                    @Override
-                    public void onClick(PromptDialog dialog) {
-                        dialog.dismiss();
-                    }
-                });
-
         colorDialog = new ColorDialog(this);
         colorDialog.setTitle(getString(R.string.exit_menu_title));
         colorDialog.setContentText(getString(R.string.exit_menu_content));
+        colorDialog.setAnimationEnable(true);
         colorDialog.setPositiveListener(getString(R.string.cancel_exit), new ColorDialog.OnPositiveListener() {
             @Override
             public void onClick(ColorDialog dialog) {
@@ -127,7 +112,7 @@ public class MainListActivity extends BaseActivity {
         getSupportActionBar().setHomeButtonEnabled(true); //设置返回键可用
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //创建返回键，并实现打开关/闭监听
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.drawerlayout_title, R.string.drawer_open) {
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.drawer_title, R.string.drawer_open) {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
@@ -199,12 +184,12 @@ public class MainListActivity extends BaseActivity {
                 position = 2;
                 mCrossView.setVisibility(View.GONE);
                 break;
-            case R.id.nav_love:
-
-                startNextView(new StatisticFragment(), "历史统计");
-                position = 3;
-                mCrossView.setVisibility(View.GONE);
-                break;
+//            case R.id.nav_love:
+//
+//                startNextView(new StatisticFragment(), "历史统计");
+//                position = 3;
+//                mCrossView.setVisibility(View.GONE);
+//                break;
             case R.id.nav_email:
                 startNextView(new SuggestFragment(), "意见反馈");
                 position = 4;
@@ -261,7 +246,6 @@ public class MainListActivity extends BaseActivity {
         }
 
 
-
     }
 
     public <T extends View> T findView(int resId) {
@@ -271,6 +255,7 @@ public class MainListActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
+        mDrawerLayout.closeDrawers();
         colorDialog.show();
     }
 }
