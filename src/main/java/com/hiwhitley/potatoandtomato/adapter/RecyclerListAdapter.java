@@ -45,7 +45,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<ItemMainListViewHo
 
     @Override
     public ItemMainListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main_list, null);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main_list, parent, false);
         view.setOnClickListener(this);
         return new ItemMainListViewHolder(view);
     }

@@ -54,6 +54,7 @@ public class StatisticFragment extends BaseFragment{
             init();
             setListener();
         }
+
         //缓存的mRootView需要判断是否已经被加过parent， 如果有parent需要从parent删除，要不然会发生这个mRootView已经有parent的错误。
         ViewGroup parent = (ViewGroup) mRootView.getParent();
         if (parent != null) {

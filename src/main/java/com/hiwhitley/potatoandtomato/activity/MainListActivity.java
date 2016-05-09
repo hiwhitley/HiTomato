@@ -92,11 +92,13 @@ public class MainListActivity extends BaseActivity {
                 //Toast.makeText(this, dialog.getPositiveText().toString(), Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
-        }).setNegativeListener(getString(R.string.exit), new ColorDialog.OnNegativeListener() {
+        });
+
+        colorDialog.setNegativeListener(getString(R.string.exit), new ColorDialog.OnNegativeListener() {
             @Override
             public void onClick(ColorDialog dialog) {
-                finish();
                 dialog.dismiss();
+                finish();
             }
         });
 
@@ -248,6 +250,14 @@ public class MainListActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        if (colorDialog.isShowing()) {
+            colorDialog.dismiss();
+        }
+        super.onDestroy();
+    }
+
     public <T extends View> T findView(int resId) {
         return (T) findViewById(resId);
     }
@@ -256,6 +266,7 @@ public class MainListActivity extends BaseActivity {
     public void onBackPressed() {
         //super.onBackPressed();
         mDrawerLayout.closeDrawers();
-        colorDialog.show();
+        if (!isFinishing())
+            colorDialog.show();
     }
 }
