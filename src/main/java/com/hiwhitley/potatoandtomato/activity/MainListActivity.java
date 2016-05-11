@@ -1,5 +1,6 @@
 package com.hiwhitley.potatoandtomato.activity;
 
+import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -51,6 +52,7 @@ public class MainListActivity extends BaseActivity {
     private Fragment mContent;
     private FragmentManager fm;
     private int position = 0;
+    private boolean isExit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,10 +100,18 @@ public class MainListActivity extends BaseActivity {
             @Override
             public void onClick(ColorDialog dialog) {
                 dialog.dismiss();
-                finish();
+                isExit = true;
+
             }
         });
 
+        colorDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                if (isExit)
+                    finish();
+            }
+        });
 
         fm = getSupportFragmentManager();
         mRecyclerListFragment = new RecyclerListFragment();
@@ -266,7 +276,6 @@ public class MainListActivity extends BaseActivity {
     public void onBackPressed() {
         //super.onBackPressed();
         mDrawerLayout.closeDrawers();
-        if (!isFinishing())
-            colorDialog.show();
+        colorDialog.show();
     }
 }
